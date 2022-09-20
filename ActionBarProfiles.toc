@@ -1,13 +1,22 @@
-## Interface: 30400
-## Title: Action Bar Profiles Azaiko wotlk
-## Author: azaiko22@gmail.com
-## SavedVariables: ActionBarProfilesAzaikoDB
-## Version: 3.4.0
+## Interface: 90001
+## Title: Action Bar Profiles
+## Author: silencer2k@gmail.com
+## SavedVariables: ActionBarProfilesDBv3
+## Version: 9.0.1-1
 
 ActionBarProfiles.xml
 
 locales\enUS.lua
+locales\ruRU.lua
 locales\deDE.lua
+locales\esES.lua
+locales\esMX.lua
+locales\frFR.lua
+locales\itIT.lua
+locales\koKR.lua
+locales\ptBR.lua
+locales\zhCN.lua
+locales\zhTW.lua
 
 ActionBarProfiles.lua
 Const.lua
@@ -15,3 +24,8 @@ Config.lua
 Dialogs.lua
 Save.lua
 Restore.lua
+
+GUI.xml
+GUI.lua
+GUISave.xml
+GUISave.lua

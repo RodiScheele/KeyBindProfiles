@@ -8,6 +8,7 @@ function frame:SaveDialogOptions()
     return table.s2k_values({
         { "Actions", "actions" },
         { "EmptySlots", "empty_slots" },
+        { "Talents", "talents" },
         { "Macros", "macros" },
         { "PetActions", "pet_actions" },
         { "Bindings", "bindings" },

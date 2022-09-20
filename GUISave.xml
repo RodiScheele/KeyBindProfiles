@@ -105,10 +105,16 @@
                     <Anchor point="TOPLEFT" relativeTo="$parentOptionActions" relativePoint="BOTTOMLEFT" x="10" />
                 </Anchors>
             </CheckButton>
+            <CheckButton name="$parentOptionTalents" parentKey="OptionTalents" inherits="UICheckButtonTemplate">
+                <Size x="16" y="16" />
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentOptionEmptySlots" relativePoint="BOTTOMLEFT" x="-10" />
+                </Anchors>
+            </CheckButton>
             <CheckButton name="$parentOptionMacros" parentKey="OptionMacros" inherits="UICheckButtonTemplate">
                 <Size x="16" y="16" />
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativeTo="$parentOptionEmptySlots" relativePoint="BOTTOMLEFT" />
+                    <Anchor point="TOPLEFT" relativeTo="$parentOptionTalents" relativePoint="BOTTOMLEFT" />
                 </Anchors>
             </CheckButton>
             <CheckButton name="$parentOptionPetActions" parentKey="OptionPetActions" inherits="UICheckButtonTemplate">

@@ -68,10 +68,10 @@ function addon:UpdateProfile(profile, quiet)
     end
 
     profile.class = select(2, UnitClass("player"))
-    profile.icon  = 
+    profile.icon  = select(4, GetSpecializationInfo(GetSpecialization()))
 
-    --self:SaveActions(profile)
-    --self:SavePetActions(profile)
+    self:SaveActions(profile)
+    self:SavePetActions(profile)
     self:SaveBindings(profile)
 
     if not quiet then
@@ -124,10 +124,31 @@ function addon:SaveActions(profile)
 
                 if type == "FLYOUT" then
                     flyouts[id] = name
+
+                elseif type == "SPELL" and IsTalentSpell(index, BOOKTYPE_SPELL) then
+                    tsNames[name] = id
                 end
             end
         end
     end
+
+    local talents = {}
+
+    local tier
+    for tier = 1, MAX_TALENT_TIERS do
+        local column = select(2, GetTalentTierInfo(tier, 1))
+        if column and column > 0 then
+            local id, name = GetTalentInfo(tier, column, 1)
+
+            if tsNames[name] then
+                tsIds[tsNames[name]] = id
+            end
+
+            talents[tier] = GetTalentLink(id)
+        end
+    end
+
+    profile.talents = talents
 
     local actions = {}
     local savedMacros = {}
@@ -153,6 +174,21 @@ function addon:SaveActions(profile)
 
         elseif type == "item" then
             actions[slot] = select(2, GetItemInfo(id))
+
+        elseif type == "companion" then
+            if sub == "MOUNT" then
+                actions[slot] = GetSpellLink(id)
+            end
+
+        elseif type == "summonpet" then
+            actions[slot] = C_PetJournal.GetBattlePetLink(id)
+
+        elseif type == "summonmount" then
+            if id == 0xFFFFFFF then
+                actions[slot] = GetSpellLink(ABP_RANDOM_MOUNT_SPELL_ID)
+            else
+                actions[slot] = GetSpellLink(({ C_MountJournal.GetMountInfoByID(id) })[2])
+            end
 
         elseif type == "macro" then
             if id > 0 then
