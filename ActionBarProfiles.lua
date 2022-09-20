@@ -1,6 +1,6 @@
 local addonName, addon = ...
 
-LibStub("AceAddon-3.0"):NewAddon(addon, addonName, "AceConsole-3.0", "AceTimer-3.0", "AceSerializer-3.0")
+LibStub("AceAddon-3.0"):NewAddon(addon, addonName, "AceConsole-3.0", "AceTimer-3.0", "AceEvent-3.0", "AceSerializer-3.0")
 
 local L = LibStub("AceLocale-3.0"):GetLocale(addonName)
 local DEBUG = "|cffff0000Debug:|r "
@@ -36,8 +36,8 @@ function addon:OnInitialize()
     -- settings page
     LibStub("AceConfig-3.0"):RegisterOptionsTable(addonName, self:GetOptions())
 
-    --LibStub("AceConfigDialog-3.0"):AddToBlizOptions(addonName, nil, nil, "general")
-    --LibStub("AceConfigDialog-3.0"):AddToBlizOptions(addonName, self.options.args.profiles.name, addonName, "profiles")
+    LibStub("AceConfigDialog-3.0"):AddToBlizOptions(addonName, nil, nil, "general")
+    LibStub("AceConfigDialog-3.0"):AddToBlizOptions(addonName, self.options.args.profiles.name, addonName, "profiles")
 
     -- minimap icon
     self.ldb = LibStub("LibDataBroker-1.1"):NewDataObject(addonName, {
