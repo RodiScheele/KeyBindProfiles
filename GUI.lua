@@ -9,7 +9,7 @@ local ACTION_BAR_PROFILE_BUTTON_HEIGHT = 44
 function frame:OnInitialize()
     self.scrollBar.doNotHide = 1
 
-    self:SetFrameLevel(CharacterFrameInsetRight:GetFrameLevel() + 1)
+    --self:SetFrameLevel(CharacterFrameInsetRight:GetFrameLevel() + 1)
 
     self.UseProfile:SetFrameLevel(self:GetFrameLevel() + 3)
     self.SaveProfile:SetFrameLevel(self:GetFrameLevel() + 3)
@@ -25,7 +25,7 @@ function frame:OnShow()
 end
 
 function frame:OnHide()
-    PaperDollActionBarProfilesSaveDialog:Hide()
+    --PaperDollActionBarProfilesSaveDialog:Hide()
 end
 
 function frame:OnUpdate()
@@ -65,13 +65,13 @@ function frame:OnProfileClick(button)
         self.selected = button.name
         self:Update()
 
-        PaperDollActionBarProfilesSaveDialog:Hide()
+        --PaperDollActionBarProfilesSaveDialog:Hide()
     else
         self.selected = nil
         self:Update()
 
-        PaperDollActionBarProfilesSaveDialog:SetProfile(nil)
-        PaperDollActionBarProfilesSaveDialog:Show()
+        --PaperDollActionBarProfilesSaveDialog:SetProfile(nil)
+        --PaperDollActionBarProfilesSaveDialog:Show()
     end
 end
 
@@ -110,22 +110,22 @@ end
 function frame:OnEditClick(button)
     self:OnProfileClick(button)
 
-    PaperDollActionBarProfilesSaveDialog:SetProfile(button.name)
-    PaperDollActionBarProfilesSaveDialog:Show()
+    --PaperDollActionBarProfilesSaveDialog:SetProfile(button.name)
+    --PaperDollActionBarProfilesSaveDialog:Show()
 end
 
 function frame:OnFavClick(button)
     local player = UnitName("player") .. "-" .. GetRealmName("player")
-    local spec = GetSpecializationInfo(GetSpecialization())
+    --local spec = GetSpecializationInfo(GetSpecialization())
 
-    addon:SetDefault(button.name, player .. "-" .. spec)
+    --addon:SetDefault(button.name, player .. "-" .. spec)
 end
 
 function frame:OnUnfavClick(button)
     local player = UnitName("player") .. "-" .. GetRealmName("player")
-    local spec = GetSpecializationInfo(GetSpecialization())
+    --local spec = GetSpecializationInfo(GetSpecialization())
 
-    addon:UnsetDefault(button.name, player .. "-" .. spec)
+    --addon:UnsetDefault(button.name, player .. "-" .. spec)
 end
 
 function frame:Update()
@@ -138,7 +138,7 @@ function frame:Update()
 
     local player = UnitName("player") .. "-" .. GetRealmName("player")
     local class = select(2, UnitClass("player"))
-    local spec = GetSpecializationInfo(GetSpecialization())
+    --local spec = GetSpecializationInfo(GetSpecialization())
 
     local cache = addon:MakeCache()
 
@@ -204,7 +204,7 @@ function frame:Update()
                     button.SelectedBar:Hide()
                 end
 
-                if addon:IsDefault(profile, player .. "-" .. spec) then
+                if addon:IsDefault(profile, player --[[.. "-" .. spec]]) then
                     button.UnfavButton:Show()
                 else
                     button.UnfavButton:Hide()
@@ -252,7 +252,7 @@ function frame:Update()
 
         self.SaveProfile:Enable()
     else
-        PaperDollActionBarProfilesSaveDialog:Hide()
+        --PaperDollActionBarProfilesSaveDialog:Hide()
 
         self.UseProfile:Disable()
         self.SaveProfile:Disable()

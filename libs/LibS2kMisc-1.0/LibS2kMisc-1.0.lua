@@ -85,15 +85,15 @@ function UnitInfoFromGuid(guid)
     return type
 end
 
-local function HookPetJournal()
+--[[local function HookPetJournal()
     local saved = { search = "" }
 
     hooksecurefunc(C_PetJournal, "ClearSearchFilter", function() saved.search = "" end)
     hooksecurefunc(C_PetJournal, "SetSearchFilter", function(text) saved.search = text end)
 
     C_PetJournal.GetSearchFilter = function() return saved.search end
-end
+encode
 
 if not oldMinor or oldMinor < 201507294 then
     HookPetJournal()
-end
+end]]

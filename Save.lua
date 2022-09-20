@@ -68,7 +68,7 @@ function addon:UpdateProfile(profile, quiet)
     end
 
     profile.class = select(2, UnitClass("player"))
-    profile.icon  = select(4, GetSpecializationInfo(GetSpecialization()))
+    profile.icon  = --select(4, GetSpecializationInfo(GetSpecialization()))
 
     self:SaveActions(profile)
     self:SavePetActions(profile)
@@ -124,31 +124,32 @@ function addon:SaveActions(profile)
 
                 if type == "FLYOUT" then
                     flyouts[id] = name
-
-                elseif type == "SPELL" and IsTalentSpell(index, BOOKTYPE_SPELL) then
-                    tsNames[name] = id
                 end
+
+                --[[elseif type == "SPELL" and IsTalentSpell(index, BOOKTYPE_SPELL) then
+                    tsNames[name] = id
+                end]]
             end
         end
     end
 
-    local talents = {}
+    --local talents = {}
 
-    local tier
+    --[[local tier
     for tier = 1, MAX_TALENT_TIERS do
         local column = select(2, GetTalentTierInfo(tier, 1))
         if column and column > 0 then
             local id, name = GetTalentInfo(tier, column, 1)
 
             if tsNames[name] then
-                tsIds[tsNames[name]] = id
+                tsIds[tsNames[name]\] = id
             end
 
             talents[tier] = GetTalentLink(id)
         end
-    end
+    end]]
 
-    profile.talents = talents
+    --profile.talents = talents
 
     local actions = {}
     local savedMacros = {}

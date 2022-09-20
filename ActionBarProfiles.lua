@@ -50,11 +50,12 @@ function addon:OnInitialize()
         OnLeave = function()
         end,
         OnClick = function(obj, button)
-            if button == "RightButton" then
-                InterfaceOptionsFrame_OpenToCategory(addonName)
-            else
+            --if button == "RightButton" then
+            InterfaceOptionsFrame_OpenToCategory(addonName)
+            --end
+            --[[else
                 ToggleCharacter("PaperDollFrame")
-            end
+            end]]
         end,
     })
 
@@ -62,7 +63,7 @@ function addon:OnInitialize()
     self.icon:Register(addonName, self.ldb, self.db.profile.minimap)
 
     -- char frame
-    if PaperDollActionBarProfilesPane then
+    --[[if PaperDollActionBarProfilesPane then
         self:InjectPaperDollSidebarTab(
             L.charframe_tab,
             "PaperDollActionBarProfilesPane",
@@ -72,7 +73,7 @@ function addon:OnInitialize()
 
         PaperDollActionBarProfilesPane:OnInitialize()
         PaperDollActionBarProfilesSaveDialog:OnInitialize()
-    end
+    end]]
 
     -- events
     self:RegisterEvent("PLAYER_REGEN_DISABLED", function(...)
@@ -112,7 +113,7 @@ function addon:OnInitialize()
             end
         end, 0.1)
 
-        self:UpdateGUI()
+        --self:UpdateGUI()
     end)
 
     self:RegisterEvent("UNIT_AURA", function(event, target)
@@ -140,7 +141,7 @@ function addon:OnInitialize()
 
                 if state ~= self.auraState then
                     self.auraState = state
-                    self:UpdateGUI()
+                    --self:UpdateGUI()
                 end
             end, 0.1)
         end
@@ -312,9 +313,9 @@ function addon:UpdateGUI()
     self.updateTimer = self:ScheduleTimer(function()
         self.updateTimer = nil
 
-        if PaperDollActionBarProfilesPane and PaperDollActionBarProfilesPane:IsShown() then
+        --[[if PaperDollActionBarProfilesPane and PaperDollActionBarProfilesPane:IsShown() then
             PaperDollActionBarProfilesPane:Update()
-        end
+        end]]
 
         if self.tooltip and self.tooltip:IsShown() then
             if InCombatLockdown() then
@@ -326,7 +327,7 @@ function addon:UpdateGUI()
     end, 0.1)
 end
 
-local PET_JOURNAL_FLAGS = { LE_PET_JOURNAL_FILTER_COLLECTED, LE_PET_JOURNAL_FILTER_NOT_COLLECTED }
+--[[local PET_JOURNAL_FLAGS = { LE_PET_JOURNAL_FILTER_COLLECTED, LE_PET_JOURNAL_FILTER_NOT_COLLECTED }
 
 function addon:SavePetJournalFilters()
     local saved = { flag = {}, source = {}, type = {} }
@@ -364,9 +365,9 @@ function addon:RestorePetJournalFilters(saved)
     for i = 1, C_PetJournal.GetNumPetTypes() do
         C_PetJournal.SetPetTypeFilter(i, saved.type[i])
     end
-end
+end]]
 
-function addon:InjectPaperDollSidebarTab(name, frame, icon, texCoords)
+--[[function addon:InjectPaperDollSidebarTab(name, frame, icon, texCoords)
     local tab = #PAPERDOLL_SIDEBARS + 1
 
     PAPERDOLL_SIDEBARS[tab] = { name = name, frame = frame, icon = icon, texCoords = texCoords, IsActive = function() return true end }
@@ -422,7 +423,7 @@ function addon:LineUpPaperDollSidebarTabs()
             prev = tab
         end
     end
-end
+end]]
 
 function addon:EncodeLink(data)
     return data:gsub(".", function(x)
