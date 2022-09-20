@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/..\FrameXML\UI.xsd">
-    <!--ScrollFrame name="PaperDollActionBarProfilesPane" parent="PaperDollFrame" inherits="HybridScrollFrameTemplate" hidden="true">
+    <ScrollFrame name="PaperDollActionBarProfilesPane" parent="PaperDollFrame" inherits="HybridScrollFrameTemplate" hidden="true">
         <Size x="172" y="354" />
         <Anchors>
             <Anchor point="TOPLEFT" relativeTo="CharacterFrameInsetRight" x="4" y="-4" />
@@ -57,7 +57,7 @@
                 self:OnUpdate()
             ]]></OnUpdate>
         </Scripts>
-    </ScrollFrame-->
+    </ScrollFrame>
     <Button name="ActionBarProfileButtonTemplate" virtual="true">
         <Size x="169" y="44" />
         <Anchors>

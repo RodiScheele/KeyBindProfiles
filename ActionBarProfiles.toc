@@ -25,7 +25,3 @@ Dialogs.lua
 Save.lua
 Restore.lua
 
-GUI.xml
-GUI.lua
-GUISave.xml
-GUISave.lua
