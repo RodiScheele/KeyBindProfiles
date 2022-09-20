@@ -76,7 +76,7 @@ function addon:OnInitialize()
     end]]
 
     -- events
-    self:RegisterEvent("PLAYER_REGEN_DISABLED", function(...)
+    --[[self:RegisterEvent("PLAYER_REGEN_DISABLED", function(...)
         self:UpdateGUI()
     end)
 
@@ -86,7 +86,7 @@ function addon:OnInitialize()
 
     self:RegisterEvent("PLAYER_UPDATE_RESTING", function(...)
         self:UpdateGUI()
-    end)
+    end)]]
 
     --[[self:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED", function(...)
         if self.specTimer then

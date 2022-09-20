@@ -68,7 +68,7 @@ function addon:UpdateProfile(profile, quiet)
     end
 
     profile.class = select(2, UnitClass("player"))
-    profile.icon  = --select(4, GetSpecializationInfo(GetSpecialization()))
+    --profile.icon  = select(4, GetSpecializationInfo(GetSpecialization()))
 
     self:SaveActions(profile)
     self:SavePetActions(profile)
@@ -159,11 +159,12 @@ function addon:SaveActions(profile)
         local type, id, sub = GetActionInfo(slot)
 
         if type == "spell" then
-            if tsIds[id] then
+            --[[if tsIds[id] then
                 actions[slot] = GetTalentLink(tsIds[id])
             else
                 actions[slot] = GetSpellLink(id)
-            end
+            end]]
+            actions[slot] = GetSpellLink(id)
 
         elseif type == "flyout" then
             if flyouts[id] then
@@ -181,15 +182,17 @@ function addon:SaveActions(profile)
                 actions[slot] = GetSpellLink(id)
             end
 
-        elseif type == "summonpet" then
+        --[[elseif type == "summonpet" then
             actions[slot] = C_PetJournal.GetBattlePetLink(id)
+            ]]
 
         elseif type == "summonmount" then
-            if id == 0xFFFFFFF then
+            actions[slot] = GetSpellLink(ABP_RANDOM_MOUNT_SPELL_ID)
+            --[[if id == 0xFFFFFFF then
                 actions[slot] = GetSpellLink(ABP_RANDOM_MOUNT_SPELL_ID)
             else
                 actions[slot] = GetSpellLink(({ C_MountJournal.GetMountInfoByID(id) })[2])
-            end
+            end]]
 
         elseif type == "macro" then
             if id > 0 then
