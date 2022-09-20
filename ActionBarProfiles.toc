@@ -21,7 +21,6 @@ locales\zhTW.lua
 ActionBarProfiles.lua
 Const.lua
 Config.lua
-Dialogs.lua
 Save.lua
 Restore.lua
 

@@ -26,9 +26,9 @@ function addon:OnInitialize()
         },
     }, ({ UnitClass("player") })[2])
 
-    self.db.RegisterCallback(self, "OnProfileReset", "UpdateGUI")
-    self.db.RegisterCallback(self, "OnProfileChanged", "UpdateGUI")
-    self.db.RegisterCallback(self, "OnProfileCopied", "UpdateGUI")
+    --self.db.RegisterCallback(self, "OnProfileReset", "UpdateGUI")
+    --self.db.RegisterCallback(self, "OnProfileChanged", "UpdateGUI")
+    --self.db.RegisterCallback(self, "OnProfileCopied", "UpdateGUI")
 
     -- chat command
     self:RegisterChatCommand("abp", "OnChatCommand")
@@ -88,7 +88,7 @@ function addon:OnInitialize()
         self:UpdateGUI()
     end)
 
-    self:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED", function(...)
+    --[[self:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED", function(...)
         if self.specTimer then
             self:CancelTimer(self.specTimer)
         end
@@ -97,7 +97,7 @@ function addon:OnInitialize()
             self.specTimer = nil
 
             local player = UnitName("player") .. "-" .. GetRealmName("player")
-            local spec = GetSpecializationInfo(GetSpecialization())
+            local spec = 0GetSpecializationInfo(GetSpecialization())
 
             if not self.prevSpec or self.prevSpec ~= spec then
                 self.prevSpec = spec
@@ -113,10 +113,10 @@ function addon:OnInitialize()
             end
         end, 0.1)
 
-        --self:UpdateGUI()
-    end)
+        self:UpdateGUI()
+    end)]]
 
-    self:RegisterEvent("UNIT_AURA", function(event, target)
+    --[[self:RegisterEvent("UNIT_AURA", function(event, target)
         if target == "player" then
             if self.auraTimer then
                 self:CancelTimer(self.auraTimer)
@@ -141,11 +141,11 @@ function addon:OnInitialize()
 
                 if state ~= self.auraState then
                     self.auraState = state
-                    --self:UpdateGUI()
+                    self:UpdateGUI()
                 end
             end, 0.1)
         end
-    end)
+    end)]]
 end
 
 function addon:ParseArgs(message)
@@ -305,7 +305,7 @@ function addon:UpdateTooltip(tooltip)
     tooltip:Show()
 end
 
-function addon:UpdateGUI()
+--[[function addon:UpdateGUI()
     if self.updateTimer then
         self:CancelTimer(self.updateTimer)
     end
@@ -313,9 +313,9 @@ function addon:UpdateGUI()
     self.updateTimer = self:ScheduleTimer(function()
         self.updateTimer = nil
 
-        --[[if PaperDollActionBarProfilesPane and PaperDollActionBarProfilesPane:IsShown() then
+        if PaperDollActionBarProfilesPane and PaperDollActionBarProfilesPane:IsShown() then
             PaperDollActionBarProfilesPane:Update()
-        end]]
+        end
 
         if self.tooltip and self.tooltip:IsShown() then
             if InCombatLockdown() then
@@ -325,7 +325,7 @@ function addon:UpdateGUI()
             end
         end
     end, 0.1)
-end
+end]]
 
 --[[local PET_JOURNAL_FLAGS = { LE_PET_JOURNAL_FILTER_COLLECTED, LE_PET_JOURNAL_FILTER_NOT_COLLECTED }
 

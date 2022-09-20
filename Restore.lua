@@ -55,7 +55,7 @@ function addon:UseProfile(profile, check, cache)
     end
 
     if not profile.skipTalents then
-        self:RestoreTalents(profile, check, cache, res)
+        --self:RestoreTalents(profile, check, cache, res)
     end
 
     if not profile.skipActions then
@@ -74,7 +74,7 @@ function addon:UseProfile(profile, check, cache)
     cache.talents = talents
 
     if not check then
-        self:UpdateGUI()
+        --self:UpdateGUI()
     end
 
     return res.fail, res.total
@@ -207,7 +207,7 @@ function addon:RestoreMacros(profile, check, cache, res)
     return fail, total
 end
 
-function addon:RestoreTalents(profile, check, cache, res)
+--[[function addon:RestoreTalents(profile, check, cache, res)
     local fail, total = 0, 0
 
     -- hack: update cache
@@ -269,7 +269,7 @@ function addon:RestoreTalents(profile, check, cache, res)
     end
 
     return fail, total
-end
+end]]
 
 function addon:RestoreActions(profile, check, cache, res)
     local fail, total = 0, 0
@@ -309,7 +309,7 @@ function addon:RestoreActions(profile, check, cache, res)
 
                     self:cPrintf(not ok and not check, L.msg_spell_not_exists, link)
 
-                elseif type == "talent" then
+                --[[elseif type == "talent" then
                     local found = self:GetFromCache(cache.talents, id, name, not check and link)
                     if found then
                         ok = true
@@ -319,34 +319,34 @@ function addon:RestoreActions(profile, check, cache, res)
                         end
                     end
 
-                    self:cPrintf(not ok and not check, L.msg_spell_not_exists, link)
+                    self:cPrintf(not ok and not check, L.msg_spell_not_exists, link)]]
 
                 elseif type == "item" then
-                    if PlayerHasToy(id) then
+                    --[[if PlayerHasToy(id) then
                         ok = true
 
                         if not check then
                             self:PlaceItem(slot, id, link)
                         end
+                    else]]
+                    local found = self:FindItemInCache(cache.equip, id, name, not check and link)
+                    if found then
+                        ok = true
+
+                        if not check then
+                            self:PlaceInventoryItem(slot, found, link)
+                        end
                     else
-                        local found = self:FindItemInCache(cache.equip, id, name, not check and link)
+                        found = self:FindItemInCache(cache.bags, id, name, not check and link)
                         if found then
                             ok = true
 
                             if not check then
-                                self:PlaceInventoryItem(slot, found, link)
-                            end
-                        else
-                            found = self:FindItemInCache(cache.bags, id, name, not check and link)
-                            if found then
-                                ok = true
-
-                                if not check then
-                                    self:PlaceContainerItem(slot, found[1], found[2], link)
-                                end
+                                self:PlaceContainerItem(slot, found[1], found[2], link)
                             end
                         end
                     end
+                    --end
 
                     if not ok and not check then
                         self:PlaceItem(slot, S2KFI:GetConvertedItemId(id) or id, link)
@@ -354,7 +354,7 @@ function addon:RestoreActions(profile, check, cache, res)
 
                     ok = true   -- sic!
 
-                elseif type == "battlepet" then
+                --[[elseif type == "battlepet" then
                     local found = self:GetFromCache(cache.pets, p6, id, not check and link)
                     if found then
                         ok = true
@@ -364,7 +364,7 @@ function addon:RestoreActions(profile, check, cache, res)
                         end
                     end
 
-                    self:cPrintf(not ok and not check, L.msg_pet_not_exists, link)
+                    self:cPrintf(not ok and not check, L.msg_pet_not_exists, link)]]
 
                 elseif type == "abp" then
                     id = tonumber(p1)
@@ -653,17 +653,17 @@ function addon:MakeCache()
         petSpells = { id = {}, name = {} },
     }
 
-    self:PreloadTalents(cache.talents, cache.allTalents)
+    --self:PreloadTalents(cache.talents, cache.allTalents)
 
     self:PreloadSpecialSpells(cache.spells)
     self:PreloadSpellbook(cache.spells, cache.flyouts)
-    self:PreloadMountjournal(cache.spells)
-    self:PreloadCombatAllySpells(cache.spells)
+    --self:PreloadMountjournal(cache.spells)
+    --self:PreloadCombatAllySpells(cache.spells)
 
     self:PreloadEquip(cache.equip)
     self:PreloadBags(cache.bags)
 
-    self:PreloadPetJournal(cache.pets)
+    --self:PreloadPetJournal(cache.pets)
 
     self:PreloadMacros(cache.macros)
 
@@ -676,7 +676,7 @@ function addon:PreloadSpecialSpells(spells)
     local level = UnitLevel("player")
     local class = select(2, UnitClass("player"))
     local faction = UnitFactionGroup("player")
-    local spec = GetSpecializationInfo(GetSpecialization())
+    local spec = 0--GetSpecializationInfo(GetSpecialization())
 
     local id, info
     for id, info in pairs(ABP_SPECIAL_SPELLS) do
@@ -710,13 +710,13 @@ function addon:PreloadSpellbook(spells, flyouts)
     end
 
     local prof
-    for prof in table.s2k_values({ GetProfessions() }) do
+    --[[for prof in table.s2k_values({ GetProfessions() }) do
         if prof then
             local count, offset = select(5, GetProfessionInfo(prof))
 
             table.insert(tabs, { type = BOOKTYPE_PROFESSION, offset = offset, count = count })
         end
-    end
+    end]]
 
     local tab
     for tab in table.s2k_values(tabs) do
@@ -735,7 +735,7 @@ function addon:PreloadSpellbook(spells, flyouts)
     end
 end
 
-function addon:PreloadMountjournal(mounts)
+--[[function addon:PreloadMountjournal(mounts)
     local all = C_MountJournal.GetMountIDs()
     local faction = (UnitFactionGroup("player") == "Alliance" and 1) or 0
 
@@ -747,9 +747,9 @@ function addon:PreloadMountjournal(mounts)
             self:UpdateCache(mounts, id, id, name)
         end
     end
-end
+end]]
 
-function addon:PreloadCombatAllySpells(spells)
+--[[function addon:PreloadCombatAllySpells(spells)
     local follower
     for follower in table.s2k_values(C_Garrison.GetFollowers() or {}) do
         if follower.garrFollowerID then
@@ -760,9 +760,9 @@ function addon:PreloadCombatAllySpells(spells)
             end
         end
     end
-end
+end]]
 
-function addon:PreloadTalents(talents, all)
+--[[function addon:PreloadTalents(talents, all)
     local tier
     for tier = 1, MAX_TALENT_TIERS do
         all[tier] = all[tier] or { id = {}, name = {} }
@@ -780,7 +780,7 @@ function addon:PreloadTalents(talents, all)
             end
         end
     end
-end
+end]]
 
 function addon:PreloadEquip(equip)
     local slot
@@ -805,7 +805,7 @@ function addon:PreloadBags(bags)
     end
 end
 
-function addon:PreloadPetJournal(pets)
+--[[function addon:PreloadPetJournal(pets)
     local saved = self:SavePetJournalFilters()
 
     C_PetJournal.ClearSearchFilter()
@@ -823,7 +823,7 @@ function addon:PreloadPetJournal(pets)
     end
 
     self:RestorePetJournalFilters(saved)
-end
+end]]
 
 function addon:PreloadMacros(macros)
     local all, char = GetNumMacros()
@@ -930,7 +930,7 @@ function addon:PlaceFlyout(slot, id, tab, link, count)
     self:PlaceToSlot(slot)
 end
 
-function addon:PlaceTalent(slot, id, link, count)
+--[[function addon:PlaceTalent(slot, id, link, count)
     count = count or ABP_PICKUP_RETRY_COUNT
 
     ClearCursor()
@@ -947,7 +947,7 @@ function addon:PlaceTalent(slot, id, link, count)
     else
         self:PlaceToSlot(slot)
     end
-end
+end]]
 
 function addon:PlaceMount(slot, id, link, count)
     ClearCursor()
@@ -1001,12 +1001,12 @@ function addon:PlaceContainerItem(slot, bag, id, link, count)
     end
 end
 
-function addon:PlacePet(slot, id, link, count)
+--[[function addon:PlacePet(slot, id, link, count)
     ClearCursor()
     C_PetJournal.PickupPet(id)
 
     self:PlaceToSlot(slot)
-end
+end]]
 
 function addon:PlaceMacro(slot, id, link, count)
     count = count or ABP_PICKUP_RETRY_COUNT

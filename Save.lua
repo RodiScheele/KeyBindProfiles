@@ -28,7 +28,7 @@ function addon:SaveProfile(name, options)
 
     list[name] = profile
 
-    self:UpdateGUI()
+    --self:UpdateGUI()
     self:Printf(L.msg_profile_saved, name)
 end
 
@@ -54,7 +54,7 @@ function addon:UpdateProfileOptions(profile, options, quiet)
     end
 
     if not quiet then
-        self:UpdateGUI()
+        --self:UpdateGUI()
         self:Printf(L.msg_profile_updated, profile.name)
     end
 end
@@ -75,7 +75,7 @@ function addon:UpdateProfile(profile, quiet)
     self:SaveBindings(profile)
 
     if not quiet then
-        self:UpdateGUI()
+        --self:UpdateGUI()
         self:Printf(L.msg_profile_updated, profile.name)
     end
 
@@ -94,7 +94,7 @@ function addon:RenameProfile(name, rename, quiet)
     list[rename] = profile
 
     if not quiet then
-        self:UpdateGUI()
+        --self:UpdateGUI()
     end
 
     self:Printf(L.msg_profile_renamed, name, rename)
@@ -105,7 +105,7 @@ function addon:DeleteProfile(name)
 
     list[name] = nil
 
-    self:UpdateGUI()
+    --self:UpdateGUI()
     self:Printf(L.msg_profile_deleted, name)
 end
 
@@ -332,7 +332,7 @@ function addon:ResetDefault(key, quiet)
     end
 
     if not quiet then
-        self:UpdateGUI()
+        --self:UpdateGUI()
     end
 end
 
@@ -347,7 +347,7 @@ function addon:SetDefault(name, key)
     profile.fav = profile.fav or {}
     profile.fav[key] = 1
 
-    self:UpdateGUI()
+    --self:UpdateGUI()
 end
 
 function addon:UnsetDefault(name, key)
@@ -359,5 +359,5 @@ function addon:UnsetDefault(name, key)
     profile.fav = profile.fav or {}
     profile.fav[key] = nil
 
-    self:UpdateGUI()
+    --self:UpdateGUI()
 end
