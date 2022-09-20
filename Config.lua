@@ -27,7 +27,7 @@ function addon:GetOptions()
                             return not self.db.profile.minimap.hide
                         end,
                     },
-                    replace_macros = {
+                    --[[replace_macros = {
                         order = 2,
                         name = L.cfg_replace_macros,
                         type = "toggle",
@@ -38,7 +38,7 @@ function addon:GetOptions()
                         get = function(info)
                             return self.db.profile.replace_macros
                         end,
-                    },
+                    },]]
                 },
             },
             profiles = LibStub("AceDBOptions-3.0"):GetOptionsTable(self.db),

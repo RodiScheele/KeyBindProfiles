@@ -45,8 +45,8 @@ function addon:UseProfile(profile, check, cache)
 
     cache = cache or self:MakeCache()
 
-    local macros = cache.macros
-    local talents = cache.talents
+    --local macros = cache.macros
+    --local talents = cache.talents
 
     local res = { fail = 0, total = 0 }
 
@@ -54,28 +54,28 @@ function addon:UseProfile(profile, check, cache)
         self:RestoreMacros(profile, check, cache, res)
     end
 
-    if not profile.skipTalents then
-        --self:RestoreTalents(profile, check, cache, res)
-    end
+    --[[if not profile.skipTalents then
+        self:RestoreTalents(profile, check, cache, res)
+    end]]
 
     if not profile.skipActions then
         self:RestoreActions(profile, check, cache, res)
     end
 
-    if not profile.skipPetActions then
+    --[[if not profile.skipPetActions then
         self:RestorePetActions(profile, check, cache, res)
-    end
+    end]]
 
     if not profile.skipBindings then
         self:RestoreBindings(profile, check, cache, res)
     end
 
-    cache.macros = macros
-    cache.talents = talents
+    --cache.macros = macros
+    --cache.talents = talents
 
-    if not check then
-        --self:UpdateGUI()
-    end
+    --[[if not check then
+        self:UpdateGUI()
+    end]]
 
     return res.fail, res.total
 end
@@ -660,7 +660,7 @@ function addon:MakeCache()
     --self:PreloadMountjournal(cache.spells)
     --self:PreloadCombatAllySpells(cache.spells)
 
-    self:PreloadEquip(cache.equip)
+    --self:PreloadEquip(cache.equip)
     self:PreloadBags(cache.bags)
 
     --self:PreloadPetJournal(cache.pets)
@@ -725,10 +725,10 @@ function addon:PreloadSpellbook(spells, flyouts)
             local type, id = GetSpellBookItemInfo(index, tab.type)
             local name = GetSpellBookItemName(index, tab.type)
 
-            if type == "FLYOUT" then
-                self:UpdateCache(flyouts, index, id, name)
+            --[[if type == "FLYOUT" then
+                self:UpdateCache(flyouts, index, id, name)]]
 
-            elseif type == "SPELL" then
+            if type == "SPELL" then
                 self:UpdateCache(spells, id, id, name)
             end
         end
@@ -782,7 +782,7 @@ end]]
     end
 end]]
 
-function addon:PreloadEquip(equip)
+--[[function addon:PreloadEquip(equip)
     local slot
     for slot = INVSLOT_FIRST_EQUIPPED, INVSLOT_LAST_EQUIPPED do
         local id = GetInventoryItemID("player", slot)
@@ -790,7 +790,7 @@ function addon:PreloadEquip(equip)
             self:UpdateCache(equip, slot, id, GetItemInfo(id))
         end
     end
-end
+end]]
 
 function addon:PreloadBags(bags)
     local bag
@@ -923,12 +923,12 @@ function addon:PlaceSpellBookItem(slot, id, tab, link, count)
     end
 end
 
-function addon:PlaceFlyout(slot, id, tab, link, count)
+--[[function addon:PlaceFlyout(slot, id, tab, link, count)
     ClearCursor()
     PickupSpellBookItem(id, tab)
 
     self:PlaceToSlot(slot)
-end
+end]]
 
 --[[function addon:PlaceTalent(slot, id, link, count)
     count = count or ABP_PICKUP_RETRY_COUNT
@@ -949,12 +949,12 @@ end
     end
 end]]
 
-function addon:PlaceMount(slot, id, link, count)
+--[[function addon:PlaceMount(slot, id, link, count)
     ClearCursor()
     C_MountJournal.Pickup(id)
 
     self:PlaceToSlot(slot)
-end
+end]]
 
 function addon:PlaceItem(slot, id, link, count)
     ClearCursor()
@@ -1027,12 +1027,12 @@ function addon:PlaceMacro(slot, id, link, count)
     end
 end
 
-function addon:PlaceEquipment(slot, id, link, count)
+--[[function addon:PlaceEquipment(slot, id, link, count)
     ClearCursor()
     PickupEquipmentSetByName(id)
 
     self:PlaceToSlot(slot)
-end
+end]]
 
 function addon:PlacePetSpell(slot, id, link, count)
     ClearCursor()

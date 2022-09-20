@@ -166,29 +166,30 @@ function addon:SaveActions(profile)
             end]]
             actions[slot] = GetSpellLink(id)
 
-        elseif type == "flyout" then
+        --[[elseif type == "flyout" then
             if flyouts[id] then
                 actions[slot] = string.format(
                     "|cffff0000|Habp:flyout:%d|h[%s]|h|r",
                     id, flyouts[id]
                 )
-            end
+            end]]
 
         elseif type == "item" then
             actions[slot] = select(2, GetItemInfo(id))
 
         elseif type == "companion" then
             if sub == "MOUNT" then
-                actions[slot] = GetSpellLink(id)
+                actions[slot] = GetCompanionInfo("MOUNT", id)
+            elseif sub == "CRITTER" then
+                actions[slot] = GetCompanionInfo("CRITTER", id)
             end
-
         --[[elseif type == "summonpet" then
             actions[slot] = C_PetJournal.GetBattlePetLink(id)
             ]]
 
-        elseif type == "summonmount" then
+        --[[elseif type == "summonmount" then
             actions[slot] = GetSpellLink(ABP_RANDOM_MOUNT_SPELL_ID)
-            --[[if id == 0xFFFFFFF then
+            if id == 0xFFFFFFF then
                 actions[slot] = GetSpellLink(ABP_RANDOM_MOUNT_SPELL_ID)
             else
                 actions[slot] = GetSpellLink(({ C_MountJournal.GetMountInfoByID(id) })[2])
@@ -215,11 +216,11 @@ function addon:SaveActions(profile)
                 savedMacros[id] = true
             end
 
-        elseif type == "equipmentset" then
+        --[[elseif type == "equipmentset" then
             actions[slot] = string.format(
                 "|cffff0000|Habp:equip|h[%s]|h|r",
                 id
-            )
+            )]]
         end
     end
 
