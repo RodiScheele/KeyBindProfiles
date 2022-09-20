@@ -366,7 +366,7 @@ function addon:RestoreActions(profile, check, cache, res)
 
                     self:cPrintf(not ok and not check, L.msg_pet_not_exists, link)]]
 
-                --[[elseif type == "abp" then
+                elseif type == "abp" then
                     id = tonumber(p1)
 
                     if sub == "flyout" then
@@ -379,9 +379,9 @@ function addon:RestoreActions(profile, check, cache, res)
                             end
                         end
 
-                        self:cPrintf(not ok and not check, L.msg_spell_not_exists, link)]]
+                        self:cPrintf(not ok and not check, L.msg_spell_not_exists, link)
 
-                    if sub == "macro" then
+                    elseif sub == "macro" then
                         local found = self:GetFromCache(cache.macros, self:PackMacro(self:DecodeLink(p2)), name, not check and link)
                         if found then
                             ok = true
@@ -400,7 +400,7 @@ function addon:RestoreActions(profile, check, cache, res)
                             end
                         end
 
-                    --[[elseif sub == "equip" then
+                    elseif sub == "equip" then
                         if GetEquipmentSetInfoByName(name) then
                             ok = true
 
@@ -409,7 +409,7 @@ function addon:RestoreActions(profile, check, cache, res)
                             end
                         end
 
-                        self:cPrintf(not ok and not check, L.msg_equip_not_exists, link)]]
+                        self:cPrintf(not ok and not check, L.msg_equip_not_exists, link)
                     else
                         self:cPrintf(not check, L.msg_bad_link, link)
                     end
@@ -598,7 +598,7 @@ function addon:FindSpellInCache(cache, id, name, link)
     end
 end
 
---[[function addon:FindFlyoutInCache(cache, id, name, link)
+function addon:FindFlyoutInCache(cache, id, name, link)
     local ok, info_name = pcall(GetFlyoutInfo, id)
     if ok then
         name = info_name
@@ -608,7 +608,7 @@ end
     if found then
         return found
     end
-end]]
+end
 
 function addon:FindItemInCache(cache, id, name, link)
     local found = self:GetFromCache(cache, id, name, link)
@@ -637,11 +637,11 @@ end
 
 function addon:MakeCache()
     local cache = {
-        --talents = { id = {}, name = {} },
-        --allTalents = {},
+        talents = { id = {}, name = {} },
+        allTalents = {},
 
         spells = { id = {}, name = {} },
-        --flyouts = { id = {}, name = {} },
+        flyouts = { id = {}, name = {} },
 
         equip = { id = {}, name = {} },
         bags = { id = {}, name = {} },
@@ -656,11 +656,11 @@ function addon:MakeCache()
     --self:PreloadTalents(cache.talents, cache.allTalents)
 
     self:PreloadSpecialSpells(cache.spells)
-    self:PreloadSpellbook(cache.spells)
+    self:PreloadSpellbook(cache.spells, cache.flyouts)
     --self:PreloadMountjournal(cache.spells)
     --self:PreloadCombatAllySpells(cache.spells)
 
-    self:PreloadEquip(cache.equip)
+    --self:PreloadEquip(cache.equip)
     self:PreloadBags(cache.bags)
 
     --self:PreloadPetJournal(cache.pets)
@@ -676,14 +676,14 @@ function addon:PreloadSpecialSpells(spells)
     local level = UnitLevel("player")
     local class = select(2, UnitClass("player"))
     local faction = UnitFactionGroup("player")
-    --local spec = GetSpecializationInfo(GetSpecialization())
+    local spec = 0--GetSpecializationInfo(GetSpecialization())
 
     local id, info
     for id, info in pairs(ABP_SPECIAL_SPELLS) do
         if (not info.level or level >= info.level) and
             (not info.class or class == info.class) and
-            (not info.faction or faction == info.faction) --[[and
-            (not info.spec or spec == info.spec)]]
+            (not info.faction or faction == info.faction) and
+            (not info.spec or spec == info.spec)
         then
             self:UpdateCache(spells, id, id)
 
@@ -697,7 +697,7 @@ function addon:PreloadSpecialSpells(spells)
     end
 end
 
-function addon:PreloadSpellbook(spells)
+function addon:PreloadSpellbook(spells, flyouts)
     local tabs = {}
 
     local book
@@ -782,7 +782,7 @@ end]]
     end
 end]]
 
-function addon:PreloadEquip(equip)
+--[[function addon:PreloadEquip(equip)
     local slot
     for slot = INVSLOT_FIRST_EQUIPPED, INVSLOT_LAST_EQUIPPED do
         local id = GetInventoryItemID("player", slot)
@@ -790,7 +790,7 @@ function addon:PreloadEquip(equip)
             self:UpdateCache(equip, slot, id, GetItemInfo(id))
         end
     end
-end
+end]]
 
 function addon:PreloadBags(bags)
     local bag
