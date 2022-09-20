@@ -1,0 +1,45 @@
+8.0.1:
+ - Updated to 8.0.1
+
+7.2.0:
+ - Updated to 7.2.0
+
+7.1.0-2:
+ - Added auto profile switching
+
+7.1.0:
+ - Updated to 7.1.0
+ - Fixed combat ally ability
+
+7.0.3-3:
+ - New macros manager
+
+7.0.3-2:
+ - Added profile sharing
+ - Added macros saving
+
+7.0.3-1:
+ - Added talent saving
+
+7.0.3
+ - Updated to 7.0.3
+
+1.2:
+ - Added LDB icon
+
+0.6:
+ - Added key bindings
+
+0.5:
+ - Added console commands
+ - Added Draenor zone ability
+
+0.4:
+ - Added profile options
+ - Updated database of factional items
+ - Added saving of pet's spells
+ - Added conversion of factional items
+ - Added console commands
+
+0.3:
+ - Initial changelog

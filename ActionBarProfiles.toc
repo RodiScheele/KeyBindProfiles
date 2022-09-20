@@ -1,0 +1,17 @@
+## Interface: 90001
+## Title: Action Bar Profiles
+## Author: silencer2k@gmail.com
+## SavedVariables: ActionBarProfilesDBv3
+## Version: 9.0.1-1
+
+ActionBarProfiles.xml
+
+locales\enUS.lua
+locales\deDE.lua
+
+ActionBarProfiles.lua
+Const.lua
+Config.lua
+Dialogs.lua
+Save.lua
+Restore.lua
