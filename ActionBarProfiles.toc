@@ -1,8 +1,8 @@
-## Interface: 90001
-## Title: Action Bar Profiles
-## Author: silencer2k@gmail.com
-## SavedVariables: ActionBarProfilesDBv3
-## Version: 9.0.1-1
+## Interface: 30400
+## Title: Action Bar Profiles Azaiko wotlk
+## Author: azaiko22@gmail.com
+## SavedVariables: ActionBarProfilesAzaikoDB
+## Version: 3.4.0
 
 ActionBarProfiles.xml
 

@@ -1,6 +1,8 @@
 Action Bar Profiles
 ===================
 
+This repo is a port of the action bar profiles addon made by Silencer2K, made working with wotlk classic. The original repository can be found below.
+
 Add-on that allows you to setup and quickly switch between different profiles of your action bars, talents, macros and key bindings.
 
 Chat commands
@@ -12,7 +14,7 @@ Chat commands
 * /abp save **profile** - saves current actions to **profile**
 * /abp del **profile** - deletes **profile**
 
-Links
+Original links to Silencer2K his addon
 -----
 
 * The latest release is available on [http://www.curse.com/addons/wow/action-bar-profiles](http://www.curse.com/addons/wow/action-bar-profiles)
