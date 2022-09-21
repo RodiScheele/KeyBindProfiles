@@ -50,17 +50,17 @@ function addon:UseProfile(profile, check, cache)
 
     local res = { fail = 0, total = 0 }
 
-    if not profile.skipMacros then
+    --[[if not profile.skipMacros then
         self:RestoreMacros(profile, check, cache, res)
-    end
+    end]]
 
     --[[if not profile.skipTalents then
         self:RestoreTalents(profile, check, cache, res)
     end]]
 
-    if not profile.skipActions then
+    --[[if not profile.skipActions then
         self:RestoreActions(profile, check, cache, res)
-    end
+    end]]
 
     --[[if not profile.skipPetActions then
         self:RestorePetActions(profile, check, cache, res)
@@ -288,15 +288,17 @@ function addon:RestoreActions(profile, check, cache, res)
             if data then
                 local type, sub, p1, p2, _, _, _, p6 = strsplit(":", data)
                 local id = tonumber(sub)
-
+                if type == "companion" then
+                    print("MOUNT FOUND")
+                end
                 if type == "spell" then
-                    if id == ABP_RANDOM_MOUNT_SPELL_ID then
+                    --[[if id == ABP_RANDOM_MOUNT_SPELL_ID then
                         ok = true
 
                         if not check then
                             self:PlaceMount(slot, 0, link)
                         end
-                    else
+                    else]]
                         local found = self:FindSpellInCache(cache.spells, id, name, not check and link)
                         if found then
                             ok = true
@@ -305,7 +307,7 @@ function addon:RestoreActions(profile, check, cache, res)
                                 self:PlaceSpell(slot, found, link)
                             end
                         end
-                    end
+                    --end
 
                     self:cPrintf(not ok and not check, L.msg_spell_not_exists, link)
 

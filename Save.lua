@@ -70,8 +70,8 @@ function addon:UpdateProfile(profile, quiet)
     profile.class = select(2, UnitClass("player"))
     --profile.icon  = select(4, GetSpecializationInfo(GetSpecialization()))
 
-    self:SaveActions(profile)
-    self:SavePetActions(profile)
+    --self:SaveActions(profile)
+    --self:SavePetActions(profile)
     self:SaveBindings(profile)
 
     if not quiet then
@@ -179,9 +179,15 @@ function addon:SaveActions(profile)
 
         elseif type == "companion" then
             if sub == "MOUNT" then
-                actions[slot] = GetCompanionInfo("MOUNT", id)
+                mount_amount = GetNumCompanions("MOUNT")
+                for i = 1, mount_amount do
+                    creatureSpellID = select("#creatureSpellID", GetCompanionInfo("MOUNT", i))
+                    print("MOUNTID: ".. creatureSpellID)
+                end
+                print("ITEMID: "..id)
+                actions[slot] = GetSpellLink(id)
             elseif sub == "CRITTER" then
-                actions[slot] = GetCompanionInfo("CRITTER", id)
+                actions[slot] = select(3, GetCompanionInfo("CRITTER", id))
             end
         --[[elseif type == "summonpet" then
             actions[slot] = C_PetJournal.GetBattlePetLink(id)
