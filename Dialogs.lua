@@ -1,4 +1,4 @@
-local addonName, addon = ...
+--[[local addonName, addon = ...
 
 local L = LibStub("AceLocale-3.0"):GetLocale(addonName)
 local DEBUG = "|cffff0000Debug:|r "
@@ -127,4 +127,4 @@ function addon:OnReceiveConfirm(popup)
         self:UpdateGUI()
         self:Printf(L.msg_profile_saved, name)
     end
-end
+end]]
