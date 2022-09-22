@@ -48,8 +48,9 @@ function addon:UpdateProfileOptions(profile, options, quiet)
             profile[k] = v
         end
     end
-
-    self:Printf("Profile %s updated", profile.name)
+    if not quiet then
+        self:Printf("Profile %s updated", profile.name)
+    end
 end
 
 function addon:UpdateProfile(profile, quiet)
@@ -64,7 +65,9 @@ function addon:UpdateProfile(profile, quiet)
 
     self:SaveBindings(profile)
 
-    self:Printf("Profile %s updated", profile.name)
+    if not quiet then
+        self:Printf("Profile %s updated", profile.name)
+    end
 
     return profile
 end

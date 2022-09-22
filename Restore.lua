@@ -93,14 +93,3 @@ function addon:RestoreBindings(profile, check, res)
 
     return 0, 0
 end
-
-function addon:IsDefault(profile, key)
-    if type(profile) ~= "table" then
-        local list = self.db.profile.list
-        profile = list[profile]
-
-        if not profile then return end
-    end
-
-    return profile.fav and profile.fav[key] and true or nil
-end

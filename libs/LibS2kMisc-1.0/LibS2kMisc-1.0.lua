@@ -70,17 +70,3 @@ function table.s2k_copy(tab)
     end
     return ret
 end
-
--- in-game functions
-
-function UnitInfoFromGuid(guid)
-    local parts = {strsplit('-', guid)}
-    local type = parts[1]
-
-    if type == 'Creature' or type == 'Vehicle' then
-        local id = tonumber(parts[6])
-        return type, id
-    end
-
-    return type
-end
