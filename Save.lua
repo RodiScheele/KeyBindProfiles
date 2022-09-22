@@ -1,6 +1,5 @@
 local addonName, addon = ...
 
-local L = LibStub("AceLocale-3.0"):GetLocale(addonName)
 local DEBUG = "|cffff0000Debug:|r "
 
 function addon:GuessName(name)
@@ -28,8 +27,7 @@ function addon:SaveProfile(name, options)
 
     list[name] = profile
 
-    --self:UpdateGUI()
-    self:Printf(L.msg_profile_saved, name)
+    self:Printf("Profile %s saved", name)
 end
 
 function addon:UpdateProfileOptions(profile, options, quiet)
@@ -55,7 +53,7 @@ function addon:UpdateProfileOptions(profile, options, quiet)
 
     if not quiet then
         --self:UpdateGUI()
-        self:Printf(L.msg_profile_updated, profile.name)
+        self:Printf("Profile %s updated", profile.name)
     end
 end
 
@@ -76,7 +74,7 @@ function addon:UpdateProfile(profile, quiet)
 
     if not quiet then
         --self:UpdateGUI()
-        self:Printf(L.msg_profile_updated, profile.name)
+        self:Printf("Profile %s updated", profile.name)
     end
 
     return profile
