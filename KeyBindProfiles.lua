@@ -2,29 +2,14 @@ local addonName, addon = ...
 
 LibStub("AceAddon-3.0"):NewAddon(addon, addonName, "AceConsole-3.0", "AceTimer-3.0", "AceEvent-3.0", "AceSerializer-3.0")
 
-function addon:cPrintf(cond, ...)
-    if cond then self:Printf(...) end
-end
-
-function addon:cPrint(cond, ...)
-    if cond then self:Print(...) end
-end
-
 function addon:OnInitialize()
     self.db = LibStub("AceDB-3.0"):New(addonName .. "DB" .. ABP_DB_VERSION, {
         profile = {
-            minimap = {
-                hide = false,
-            },
-            list = {},
-            replace_macros = false,
-        },
+            list = {}        },
     }, ({ UnitClass("player") })[2])
 
-    -- chat command
     self:RegisterChatCommand("kbp", "OnChatCommand")
 
-    -- settings page
     LibStub("AceConfig-3.0"):RegisterOptionsTable(addonName, self:GetOptions())
 
     LibStub("AceConfigDialog-3.0"):AddToBlizOptions(addonName, nil, nil, "profiles")
@@ -96,19 +81,4 @@ function addon:OnChatCommand(message)
             end
         end
     end
-end
-function addon:EncodeLink(data)
-    return data:gsub(".", function(x)
-        return ((x:byte() < 32 or x:byte() == 127 or x == "|" or x == ":" or x == "[" or x == "]" or x == "~") and string.format("~%02x", x:byte())) or x
-    end)
-end
-
-function addon:DecodeLink(data)
-    return data:gsub("~[0-9A-Fa-f][0-9A-Fa-f]", function(x)
-        return string.char(tonumber(x:sub(2), 16))
-    end)
-end
-
-function addon:PackMacro(macro)
-    return macro:gsub("^%s+", ""):gsub("%s+\n", "\n"):gsub("\n%s+", "\n"):gsub("%s+$", ""):sub(1)
 end
