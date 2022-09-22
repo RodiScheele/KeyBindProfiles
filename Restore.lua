@@ -45,37 +45,9 @@ function addon:UseProfile(profile, check, cache)
 
     cache = cache or self:MakeCache()
 
-    --local macros = cache.macros
-    --local talents = cache.talents
-
     local res = { fail = 0, total = 0 }
 
-    --[[if not profile.skipMacros then
-        self:RestoreMacros(profile, check, cache, res)
-    end]]
-
-    --[[if not profile.skipTalents then
-        self:RestoreTalents(profile, check, cache, res)
-    end]]
-
-    --[[if not profile.skipActions then
-        self:RestoreActions(profile, check, cache, res)
-    end]]
-
-    --[[if not profile.skipPetActions then
-        self:RestorePetActions(profile, check, cache, res)
-    end]]
-
-    if not profile.skipBindings then
-        self:RestoreBindings(profile, check, cache, res)
-    end
-
-    --cache.macros = macros
-    --cache.talents = talents
-
-    --[[if not check then
-        self:UpdateGUI()
-    end]]
+    self:RestoreBindings(profile, check, cache, res)
 
     return res.fail, res.total
 end
@@ -206,70 +178,6 @@ function addon:RestoreMacros(profile, check, cache, res)
 
     return fail, total
 end
-
---[[function addon:RestoreTalents(profile, check, cache, res)
-    local fail, total = 0, 0
-
-    -- hack: update cache
-    local talents = { id = {}, name = {} }
-    local rest = self.auraState or IsResting()
-
-    local tier
-    for tier = 1, MAX_TALENT_TIERS do
-        local link = profile.talents[tier]
-        if link then
-            -- has action
-            local ok
-            total = total + 1
-
-            local data, name = link:match("^|c.-|H(.-)|h%[(.-)%]|h|r$")
-            link = link:gsub("|Habp:.+|h(%[.+%])|h", "%1")
-
-            if data then
-                local type, sub = strsplit(":", data)
-                local id = tonumber(sub)
-
-                if type == "talent" then
-                    local found = self:GetFromCache(cache.allTalents[tier], id, name, not check and link)
-                    if found then
-                        if self:GetFromCache(cache.talents, id) or rest or select(2, GetTalentTierInfo(tier, 1)) == 0 then
-                            ok = true
-
-                            -- hack: update cache
-                            self:UpdateCache(talents, found, id, select(2, GetTalentInfoByID(id)))
-
-                            if not check then
-                                LearnTalent(found)
-                            end
-                        else
-                            self:cPrintf(not check, L.msg_cant_learn_talent, link)
-                        end
-                    else
-                        self:cPrintf(not check, L.msg_talent_not_exists, link)
-                    end
-                else
-                    self:cPrintf(not check, L.msg_bad_link, link)
-                end
-            else
-                self:cPrintf(not check, L.msg_bad_link, link)
-            end
-
-            if not ok then
-                fail = fail + 1
-            end
-        end
-    end
-
-    -- hack: update cache
-    cache.talents = talents
-
-    if res then
-        res.fail = res.fail + fail
-        res.total = res.total + total
-    end
-
-    return fail, total
-end]]
 
 function addon:RestoreActions(profile, check, cache, res)
     local fail, total = 0, 0

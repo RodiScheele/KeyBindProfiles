@@ -1,4 +1,4 @@
-Action Bar Profiles
+Key Bind Profiles
 ===================
 
 This repo is a port of the action bar profiles addon made by Silencer2K, made working with wotlk classic. The original repository can be found below.

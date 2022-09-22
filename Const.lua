@@ -1,6 +1,6 @@
-ABP_DB_VERSION = "v3"
+ABP_DB_VERSION = "v1"
 
-ABP_ADDON_NAME = "Action Bar Profiles"
+ABP_ADDON_NAME = "Key Bind Profiles"
 ABP_DOWNLOAD_LINK = "https://mods.curse.com/addons/wow/action-bar-profiles"
 
 ABP_MAX_ACTION_BUTTONS = 120

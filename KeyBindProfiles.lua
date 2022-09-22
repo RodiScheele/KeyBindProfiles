@@ -26,10 +26,6 @@ function addon:OnInitialize()
         },
     }, ({ UnitClass("player") })[2])
 
-    --self.db.RegisterCallback(self, "OnProfileReset", "UpdateGUI")
-    --self.db.RegisterCallback(self, "OnProfileChanged", "UpdateGUI")
-    --self.db.RegisterCallback(self, "OnProfileCopied", "UpdateGUI")
-
     -- chat command
     self:RegisterChatCommand("abp", "OnChatCommand")
 
@@ -50,102 +46,12 @@ function addon:OnInitialize()
         OnLeave = function()
         end,
         OnClick = function(obj, button)
-            --if button == "RightButton" then
             InterfaceOptionsFrame_OpenToCategory(addonName)
-            --end
-            --[[else
-                ToggleCharacter("PaperDollFrame")
-            end]]
         end,
     })
 
     self.icon = LibStub("LibDBIcon-1.0")
     self.icon:Register(addonName, self.ldb, self.db.profile.minimap)
-
-    -- char frame
-    --[[if PaperDollActionBarProfilesPane then
-        self:InjectPaperDollSidebarTab(
-            L.charframe_tab,
-            "PaperDollActionBarProfilesPane",
-            "Interface\\AddOns\\ActionBarProfiles\\textures\\CharDollBtn",
-            { 0, 0.515625, 0, 0.13671875 }
-        )
-
-        PaperDollActionBarProfilesPane:OnInitialize()
-        PaperDollActionBarProfilesSaveDialog:OnInitialize()
-    end]]
-
-    -- events
-    --[[self:RegisterEvent("PLAYER_REGEN_DISABLED", function(...)
-        self:UpdateGUI()
-    end)
-
-    self:RegisterEvent("PLAYER_REGEN_ENABLED", function(...)
-        self:UpdateGUI()
-    end)
-
-    self:RegisterEvent("PLAYER_UPDATE_RESTING", function(...)
-        self:UpdateGUI()
-    end)]]
-
-    --[[self:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED", function(...)
-        if self.specTimer then
-            self:CancelTimer(self.specTimer)
-        end
-
-        self.specTimer = self:ScheduleTimer(function()
-            self.specTimer = nil
-
-            local player = UnitName("player") .. "-" .. GetRealmName("player")
-            local spec = 0GetSpecializationInfo(GetSpecialization())
-
-            if not self.prevSpec or self.prevSpec ~= spec then
-                self.prevSpec = spec
-
-                local list = self.db.profile.list
-                local profile
-
-                for profile in table.s2k_values(list) do
-                    if profile.fav and profile.fav[player .. "-" .. spec] then
-                        self:UseProfile(profile)
-                    end
-                end
-            end
-        end, 0.1)
-
-        self:UpdateGUI()
-    end)]]
-
-    --[[self:RegisterEvent("UNIT_AURA", function(event, target)
-        if target == "player" then
-            if self.auraTimer then
-                self:CancelTimer(self.auraTimer)
-            end
-
-            self.auraTimer = self:ScheduleTimer(function()
-                self.auraTimer = nil
-
-                local checkAura = {
-                    ({ GetSpellInfo(ABP_TOME_OF_CLEAR_MIND_SPELL_ID) })[1],
-                    ({ GetSpellInfo(ABP_TOME_OF_TRANQUIL_MIND_SPELL_ID) })[1],
-                    ({ GetSpellInfo(ABP_DUNGEON_PREPARE_SPELL_ID) })[1],
-                }
-
-                local state, index
-                for index = 1, 40 do
-                        local aura = UnitAura("player", index)
-                        if aura and (aura == checkAura[1] or aura == checkAura[2] or aura == checkAura[3]) then
-                            state = true
-                        end
-                end
-
-                if state ~= self.auraState then
-                    self.auraState = state
-                    self:UpdateGUI()
-                end
-            end, 0.1)
-        end
-    end)]]
 end
 
 function addon:ParseArgs(message)
@@ -219,7 +125,7 @@ end
 function addon:ShowTooltip(anchor)
     if not (InCombatLockdown() or (self.tooltip and self.tooltip:IsShown())) then
         if not (qtip:IsAcquired(addonName) and self.tooltip) then
-            self.tooltip = qtip:Acquire(addonName, 2, "LEFT")
+            self.tooltip = qtip:Acquire(addonName)
 
             self.tooltip.OnRelease = function()
                 self.tooltip = nil
@@ -304,126 +210,6 @@ function addon:UpdateTooltip(tooltip)
     tooltip:UpdateScrolling()
     tooltip:Show()
 end
-
---[[function addon:UpdateGUI()
-    if self.updateTimer then
-        self:CancelTimer(self.updateTimer)
-    end
-
-    self.updateTimer = self:ScheduleTimer(function()
-        self.updateTimer = nil
-
-        if PaperDollActionBarProfilesPane and PaperDollActionBarProfilesPane:IsShown() then
-            PaperDollActionBarProfilesPane:Update()
-        end
-
-        if self.tooltip and self.tooltip:IsShown() then
-            if InCombatLockdown() then
-                self.tooltip:Hide()
-            else
-                self:UpdateTooltip(self.tooltip)
-            end
-        end
-    end, 0.1)
-end]]
-
---[[local PET_JOURNAL_FLAGS = { LE_PET_JOURNAL_FILTER_COLLECTED, LE_PET_JOURNAL_FILTER_NOT_COLLECTED }
-
-function addon:SavePetJournalFilters()
-    local saved = { flag = {}, source = {}, type = {} }
-
-    saved.text = C_PetJournal.GetSearchFilter()
-
-    local i
-    for i in table.s2k_values(PET_JOURNAL_FLAGS) do
-        saved.flag[i] = C_PetJournal.IsFilterChecked(i)
-    end
-
-    for i = 1, C_PetJournal.GetNumPetSources() do
-        saved.source[i] = C_PetJournal.IsPetSourceChecked(i)
-    end
-
-    for i = 1, C_PetJournal.GetNumPetTypes() do
-        saved.type[i] = C_PetJournal.IsPetTypeChecked(i)
-    end
-
-    return saved
-end
-
-function addon:RestorePetJournalFilters(saved)
-    C_PetJournal.SetSearchFilter(saved.text)
-
-    local i
-    for i in table.s2k_values(PET_JOURNAL_FLAGS) do
-        C_PetJournal.SetFilterChecked(i, saved.flag[i])
-    end
-
-    for i = 1, C_PetJournal.GetNumPetSources() do
-        C_PetJournal.SetPetSourceChecked(i, saved.source[i])
-    end
-
-    for i = 1, C_PetJournal.GetNumPetTypes() do
-        C_PetJournal.SetPetTypeFilter(i, saved.type[i])
-    end
-end]]
-
---[[function addon:InjectPaperDollSidebarTab(name, frame, icon, texCoords)
-    local tab = #PAPERDOLL_SIDEBARS + 1
-
-    PAPERDOLL_SIDEBARS[tab] = { name = name, frame = frame, icon = icon, texCoords = texCoords, IsActive = function() return true end }
-
-    CreateFrame(
-        "Button", "PaperDollSidebarTab" .. tab, PaperDollSidebarTabs,
-        "PaperDollSidebarTabTemplate", tab
-    )
-
-    self:LineUpPaperDollSidebarTabs()
-
-    if not self.prevSetLevel then
-        self.prevSetLevel = PaperDollFrame_SetLevel
-
-        PaperDollFrame_SetLevel = function(...)
-            self.prevSetLevel(...)
-
-            local extra = #PAPERDOLL_SIDEBARS - ABP_DEFAULT_PAPERDOLL_NUM_TABS
-
-            if CharacterFrameInsetRight:IsVisible() then
-                local index
-                for index = 1, CharacterLevelText:GetNumPoints() do
-                    local point, relTo, relPoint, x, y = CharacterLevelText:GetPoint(index)
-
-                    if point == "CENTER" then
-                        CharacterLevelText:SetPoint(
-                            point, relTo, relPoint,
-                            x - (20 + 10 * extra), y
-                        )
-                    end
-                end
-            end
-        end
-    end
-end
-
-function addon:LineUpPaperDollSidebarTabs()
-    local extra = #PAPERDOLL_SIDEBARS - ABP_DEFAULT_PAPERDOLL_NUM_TABS
-    local prev
-
-    local index
-    for index = 1, #PAPERDOLL_SIDEBARS do
-        local tab = _G["PaperDollSidebarTab" .. index]
-        if tab then
-            tab:ClearAllPoints()
-            tab:SetPoint("BOTTOMRIGHT", (extra < 2 and -20) or (extra < 3 and -10) or 0, 0)
-
-            if prev then
-                prev:ClearAllPoints()
-                prev:SetPoint("RIGHT", tab, "LEFT", -4, 0)
-            end
-
-            prev = tab
-        end
-    end
-end]]
 
 function addon:EncodeLink(data)
     return data:gsub(".", function(x)

@@ -1,0 +1,14 @@
+## Interface: 90001
+## Title: Key Bind Profiles
+## Author: silencer2k@gmail.com
+## SavedVariables: KeyBindProfilesDBv1
+## Version: 9.0.1-1
+
+KeyBindProfiles.xml
+
+KeyBindProfiles.lua
+Const.lua
+Config.lua
+Save.lua
+Restore.lua
+
