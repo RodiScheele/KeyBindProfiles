@@ -69,6 +69,8 @@ function addon:OnChatCommand(message)
                 self:Printf("No profiles available", param)
             end
         end
+    elseif cmd == "help" then
+        self:ShowHelp()
 
     elseif cmd == "use" or cmd == "load" or cmd == "ld" then
         if param then
@@ -82,3 +84,16 @@ function addon:OnChatCommand(message)
         end
     end
 end
+
+function addon:ShowHelp()
+    local commands = {
+        "KeyBindProfiles Commands:",
+        " /kbp save <profilename>  -- Save or update the current keybinds",
+        " /kbp load <profilename>  -- Loads an existing keybind profile",
+        " /kbp delete <profilename> update  -- Deletes an existing keybind profile",
+        " /kbp list -- Lists all existing profiles"
+    }
+    for index, line in ipairs(commands) do
+        DEFAULT_CHAT_FRAME:AddMessage(line, 1, 1, 0)
+    end
+  end
