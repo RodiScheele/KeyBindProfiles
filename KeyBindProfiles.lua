@@ -82,6 +82,8 @@ function addon:OnChatCommand(message)
                 self:Printf("No profiles available", param)
             end
         end
+    else
+        self:Printf("Command not found, try '/kbp help' for more info")
     end
 end
 
