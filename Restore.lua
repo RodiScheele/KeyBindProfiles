@@ -1,9 +1,5 @@
 local addonName, addon = ...
 
-local DEBUG = "|cffff0000Debug:|r "
-
-local S2KFI = LibStub("LibS2kFactionalItems-1.0")
-
 function addon:GetProfiles(filter, case)
     local list = self.db.profile.list
     local sorted = {}

@@ -7,7 +7,6 @@
 KeyBindProfiles.xml
 
 KeyBindProfiles.lua
-Const.lua
 Config.lua
 Save.lua
 Restore.lua

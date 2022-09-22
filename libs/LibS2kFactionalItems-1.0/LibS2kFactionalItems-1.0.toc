@@ -1,9 +1,0 @@
-## Interface: 80200
-## Title: Lib: S2k Factional Items
-## Author: silencer2k@gmail.com
-## Version: 1.0
-## X-Part-Of: Libraries
-## X-Category: Library
-
-LibStub\LibStub.lua
-lib.xml

@@ -1,9 +1,9 @@
 local addonName, addon = ...
 
-LibStub("AceAddon-3.0"):NewAddon(addon, addonName, "AceConsole-3.0", "AceTimer-3.0", "AceEvent-3.0", "AceSerializer-3.0")
+LibStub("AceAddon-3.0"):NewAddon(addon, addonName, "AceConsole-3.0")
 
 function addon:OnInitialize()
-    self.db = LibStub("AceDB-3.0"):New(addonName .. "DB" .. ABP_DB_VERSION, {
+    self.db = LibStub("AceDB-3.0"):New(addonName .. "DBv1", {
         profile = {
             list = {}        },
     }, ({ UnitClass("player") })[2])
