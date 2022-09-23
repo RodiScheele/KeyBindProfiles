@@ -28,7 +28,7 @@ function addon:GetProfiles(filter, case)
     return unpack(sorted)
 end
 
-function addon:UseProfile(profile, check, cache)
+function addon:UseProfile(profile, check)
     if type(profile) ~= "table" then
         local list = self.db.profile.list
         profile = list[profile]
