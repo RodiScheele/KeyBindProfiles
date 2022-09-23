@@ -1,6 +1,6 @@
 local addonName, addon = ...
 
-LibStub("AceAddon-3.0"):NewAddon(addon, addonName, "AceConsole-3.0", "CallbackHandler-1.0")
+LibStub("AceAddon-3.0"):NewAddon(addon, addonName, "AceConsole-3.0")
 
 function addon:OnInitialize()
     self.db = LibStub("AceDB-3.0"):New(addonName .. "DBv1", {
