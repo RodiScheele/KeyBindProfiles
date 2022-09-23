@@ -2,7 +2,7 @@ local addonName, addon = ...
 
 function addon:SaveProfile()
     local profile = self.db.profile.list
-
+    print("SAVING BINDINGS")
     profile.class = select(2, UnitClass("player"))
 
     profileName = self.db:GetCurrentProfile()

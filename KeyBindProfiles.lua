@@ -1,6 +1,6 @@
 local addonName, addon = ...
 
-LibStub("AceAddon-3.0"):NewAddon(addon, addonName, "AceConsole-3.0")
+LibStub("AceAddon-3.0"):NewAddon(addon, addonName, "AceEvent-3.0", "AceConsole-3.0")
 
 function addon:OnInitialize()
     self.db = LibStub("AceDB-3.0"):New(addonName .. "DBv1", {
@@ -17,6 +17,7 @@ function addon:OnInitialize()
     LibDualSpec:EnhanceOptions(self.options.args.profiles, self.db)
 
     -- Register Callbacks on certain events
+    self:RegisterEvent("UPDATE_BINDINGS", "SaveProfile")
     self.db.RegisterCallback(self, "OnNewProfile", "SaveProfile")
     self.db.RegisterCallback(self, "OnProfileShutdown", "SaveProfile")
     self.db.RegisterCallback(self, "OnProfileChanged", "RestoreDbBindings")
