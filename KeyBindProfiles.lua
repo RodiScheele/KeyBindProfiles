@@ -8,15 +8,20 @@ function addon:OnInitialize()
             list = {}},
     })
 
+    LibStub("AceConfig-3.0"):RegisterOptionsTable(addonName, self:GetOptions())
+    LibStub("AceConfigDialog-3.0"):AddToBlizOptions(addonName, nil, nil, "profiles")
+
+    -- Add dual-spec support
+    local LibDualSpec = LibStub('LibDualSpec-1.0')
+    LibDualSpec:EnhanceDatabase(self.db, addonName)
+    LibDualSpec:EnhanceOptions(self.options.args.profiles, self.db)
+
+    -- Register Callbacks on certain events
     self:RegisterChatCommand("kbp", "OnChatCommand")
     self.db.RegisterCallback(self, "OnNewProfile", "SaveProfile")
     self.db.RegisterCallback(self, "OnProfileShutdown", "SaveProfile")
     self.db.RegisterCallback(self, "OnProfileChanged", "RestoreDbBindings")
     self.db.RegisterCallback(self, "OnProfileCopied", "RestoreDbBindings")
     self.db.RegisterCallback(self, "OnProfileReset", "RestoreDefaultBindings")
-
-    LibStub("AceConfig-3.0"):RegisterOptionsTable(addonName, self:GetOptions())
-
-    LibStub("AceConfigDialog-3.0"):AddToBlizOptions(addonName, nil, nil, "profiles")
 end
 
