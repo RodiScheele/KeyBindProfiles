@@ -9,6 +9,11 @@ function addon:OnInitialize()
     })
 
     self:RegisterChatCommand("kbp", "OnChatCommand")
+    self.db.RegisterCallback(self, "OnNewProfile", "SaveProfile")
+    self.db.RegisterCallback(self, "OnProfileShutdown", "SaveProfile")
+    self.db.RegisterCallback(self, "OnProfileChanged", "RestoreDbBindings")
+    self.db.RegisterCallback(self, "OnProfileCopied", "RestoreDbBindings")
+    self.db.RegisterCallback(self, "OnProfileReset", "RestoreDefaultBindings")
 
     LibStub("AceConfig-3.0"):RegisterOptionsTable(addonName, self:GetOptions())
 

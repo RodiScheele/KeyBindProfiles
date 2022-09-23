@@ -24,15 +24,7 @@ function addon:OnChatCommand(message)
         self:ShowHelp()
 
     elseif cmd == "use" or cmd == "load" or cmd == "ld" then
-        if param then
-            local profile = self:GetProfiles(param, true)
-
-            if profile then
-                self:UseProfile(profile)
-            else
-                self:Printf("No profiles available", param)
-            end
-        end
+        self:RestoreDbBindings()
     else
         self:Printf("Command not found, try '/kbp help' for more info")
     end

@@ -1,13 +1,17 @@
 local addonName, addon = ...
 
 function addon:SaveProfile()
-    local list = self.db.profile.list
+    local profile = self.db.profile.list
 
     profile.class = select(2, UnitClass("player"))
 
-    self:SaveBindings(profile)
+    profileName = self.db:GetCurrentProfile()
 
-    self:Printf("Profile %s saved", self.db:GetCurrentProfile())
+    if profileName ~= "Default" then
+        self:SaveBindings(profile)
+    end
+
+    self:Printf("Profile %s saved", profileName)
 end
 
 
