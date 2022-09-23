@@ -17,11 +17,9 @@ function addon:OnInitialize()
     LibDualSpec:EnhanceOptions(self.options.args.profiles, self.db)
 
     -- Register Callbacks on certain events
-    self:RegisterChatCommand("kbp", "OnChatCommand")
     self.db.RegisterCallback(self, "OnNewProfile", "SaveProfile")
     self.db.RegisterCallback(self, "OnProfileShutdown", "SaveProfile")
     self.db.RegisterCallback(self, "OnProfileChanged", "RestoreDbBindings")
     self.db.RegisterCallback(self, "OnProfileCopied", "RestoreDbBindings")
     self.db.RegisterCallback(self, "OnProfileReset", "RestoreDefaultBindings")
 end
-

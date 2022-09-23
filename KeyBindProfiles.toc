@@ -12,7 +12,6 @@
 KeyBindProfiles.xml
 
 KeyBindProfiles.lua
-Cmd.lua
 Config.lua
 Save.lua
 Restore.lua

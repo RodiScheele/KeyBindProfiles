@@ -11,7 +11,6 @@ function addon:SaveProfile()
         self:SaveBindings(profile)
     end
 
-    self:Printf("Profile %s saved", profileName)
 end
 
 
