@@ -7,9 +7,7 @@ function addon:SaveProfile()
 
     profileName = self.db:GetCurrentProfile()
 
-    if profileName ~= "Default" then
-        self:SaveBindings(profile)
-    end
+    self:SaveBindings(profile)
 end
 
 

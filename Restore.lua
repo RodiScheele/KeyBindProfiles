@@ -2,11 +2,13 @@ local addonName, addon = ...
 
 function addon:RestoreDbBindings()
     local profile = self.db.profile.list
-    
+    print("Profile name")
     profileName = self.db:GetCurrentProfile()
+    print(profileName)
 
     if profileName == "Default" then
         self:RestoreDefaultBindings()
+        self:SaveProfile()
         return
     end
 

@@ -36,7 +36,7 @@ function addon:OnInitialize()
     LibDualSpec:EnhanceOptions(self.options.args.profiles, self.db)
 
     -- Register Callbacks on certain events
-    self:RegisterEvent("UPDATE_BINDINGS", "SaveProfile")
+    --self:RegisterEvent("UPDATE_BINDINGS", "SaveProfile")
     self.db.RegisterCallback(self, "OnProfileShutdown", "SaveProfile")
     self.db.RegisterCallback(self, "OnProfileChanged", "RestoreDbBindings")
     self.db.RegisterCallback(self, "OnProfileCopied", "RestoreDbBindings")
