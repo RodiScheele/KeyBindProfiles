@@ -3,6 +3,9 @@ local addonName, addon = ...
 function addon:SaveProfile()
     local profile = self.db.profile.list
 
+    -- DEBUG LINE REMOVE LATER
+    print("Saved profile")
+
     profile.class = select(2, UnitClass("player"))
 
     profileName = self.db:GetCurrentProfile()

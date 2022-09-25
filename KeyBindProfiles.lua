@@ -6,7 +6,9 @@ function addon:OnInitialize()
     self.db = LibStub("AceDB-3.0"):New(addonName .. "DBv1", {
         profile = {
             minimap = { hide = false, },
-            list = {}},
+            list = {},
+            auto_save = { enabled = false, },
+        }
     })
 
     self.ldb = LibStub("LibDataBroker-1.1"):NewDataObject(addonName, {
@@ -27,7 +29,7 @@ function addon:OnInitialize()
     self.icon:Register(addonName, self.ldb, self.db.profile.minimap)
 
     LibStub("AceConfig-3.0"):RegisterOptionsTable(addonName, self:GetOptions())
-    LibStub("AceConfigDialog-3.0"):AddToBlizOptions(addonName, "KeyBindProfiles", nil, "minimap")
+    LibStub("AceConfigDialog-3.0"):AddToBlizOptions(addonName, "KeyBindProfiles", nil, "general_settings")
     LibStub("AceConfigDialog-3.0"):AddToBlizOptions(addonName, "Profiles", "KeyBindProfiles", "profiles")
 
     -- dual-spec support
@@ -36,10 +38,13 @@ function addon:OnInitialize()
     LibDualSpec:EnhanceOptions(self.options.args.profiles, self.db)
 
     -- Register Callbacks on certain events
-    --self:RegisterEvent("UPDATE_BINDINGS", "SaveProfile")
-    self.db.RegisterCallback(self, "OnProfileShutdown", "SaveProfile")
     self.db.RegisterCallback(self, "OnProfileChanged", "RestoreDbBindings")
     self.db.RegisterCallback(self, "OnProfileCopied", "RestoreDbBindings")
     self.db.RegisterCallback(self, "OnProfileReset", "RestoreDefaultBindings")
     self.db.RegisterCallback(self, "OnNewProfile", "SaveProfile")
+    if self.db.profile.auto_save.enabled then
+        print("AUTO SAVE IS ENABLED")
+        self:RegisterEvent("UPDATE_BINDINGS", "SaveProfile")
+        self.db.RegisterCallback(self, "OnProfileShutdown", "SaveProfile")
+    end
 end
