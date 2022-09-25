@@ -5,7 +5,7 @@ function addon:GetOptions()
         type = "group",
         args = {
             general_settings = {
-                name = "General settings",
+                name = "General options",
                 type = "group",
                 args = {
                     minimap = {

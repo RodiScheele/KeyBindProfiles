@@ -3,14 +3,13 @@ local addonName, addon = ...
 function addon:SaveProfile()
     local profile = self.db.profile.list
 
-    -- DEBUG LINE REMOVE LATER
-    print("Saved profile")
-
     profile.class = select(2, UnitClass("player"))
 
     profileName = self.db:GetCurrentProfile()
 
-    self:SaveBindings(profile)
+    if self.db.profile.update_bindings_trigger then
+        self:SaveBindings(profile)
+    end
 end
 
 

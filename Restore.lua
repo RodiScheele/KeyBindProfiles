@@ -4,7 +4,7 @@ function addon:RestoreDbBindings()
     local profile = self.db.profile.list
     print("Profile name")
     profileName = self.db:GetCurrentProfile()
-    print(profileName)
+    self.db.profile.update_bindings_trigger = false
 
     if profileName == "Default" then
         self:RestoreDefaultBindings()
@@ -50,8 +50,11 @@ function addon:RestoreDbBindings()
             end
         end
     end
+    self.db.profile.update_bindings_trigger = true
 end
 
 function addon:RestoreDefaultBindings()
+    self.db.profile.update_bindings_trigger = false
     LoadBindings(0)
+    self.db.profile.update_bindings_trigger = true
 end
