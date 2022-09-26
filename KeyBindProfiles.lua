@@ -5,13 +5,13 @@ LibStub("AceAddon-3.0"):NewAddon(addon, addonName, "AceEvent-3.0", "AceConsole-3
 function addon:OnInitialize()
     -- Register DB
     self.db = LibStub("AceDB-3.0"):New(addonName .. "DBv1", {
-        profile = {
+        global = {
             minimap = { hide = false, },
-            list = {},
             auto_save = { enabled = false, },
-            update_bindings_trigger = true,
         }
     })
+
+    update_bindings_trigger = true
 
     -- Minimap icon
     self.ldb = LibStub("LibDataBroker-1.1"):NewDataObject(addonName, {
@@ -29,7 +29,7 @@ function addon:OnInitialize()
     })
     
     self.icon = LibStub("LibDBIcon-1.0")
-    self.icon:Register(addonName, self.ldb, self.db.profile.minimap)
+    self.icon:Register(addonName, self.ldb, self.db.global.minimap)
 
     -- Options tables
     LibStub("AceConfig-3.0"):RegisterOptionsTable(addonName, self:GetOptions())
@@ -46,8 +46,13 @@ function addon:OnInitialize()
     self.db.RegisterCallback(self, "OnProfileCopied", "RestoreDbBindings")
     self.db.RegisterCallback(self, "OnProfileReset", "RestoreDefaultBindings")
     self.db.RegisterCallback(self, "OnNewProfile", "SaveProfile")
-    if self.db.profile.auto_save.enabled then
+    if self.db.global.auto_save.enabled then
         self:RegisterEvent("UPDATE_BINDINGS", "SaveProfile")
         self.db.RegisterCallback(self, "OnProfileShutdown", "SaveProfile")
     end
+end
+
+function addon:OnEnable()
+    self:InitializeProfile()
+    self:RestoreDbBindings()
 end

@@ -15,7 +15,7 @@ function addon:GetOptions()
                         type = "toggle",
                         width = "full",
                         set = function(info, value)
-                            self.db.profile.minimap.hide = not value
+                            self.db.global.minimap.hide = not value
                             if value then
                                 self.icon:Show(addonName)
                             else
@@ -23,7 +23,7 @@ function addon:GetOptions()
                             end
                         end,
                         get = function(info)
-                            return not self.db.profile.minimap.hide
+                            return not self.db.global.minimap.hide
                         end,
                     },
                     auto_save = {
@@ -34,10 +34,10 @@ function addon:GetOptions()
                         width = "full",
                         confirm = function(info, value)
                             if value then
-                                self.db.profile.auto_save.enabled = true
+                                self.db.global.auto_save.enabled = true
                                 return "This setting is applied only after reloading your UI. Do you want to reload UI now?"
                             else
-                                self.db.profile.auto_save.enabled = false
+                                self.db.global.auto_save.enabled = false
                                 return "This setting is applied only after reloading your UI. Do you want to reload UI now?"
                             end
                         end,
@@ -45,7 +45,7 @@ function addon:GetOptions()
                             ReloadUI();
                         end,
                         get = function(info)
-                            return self.db.profile.auto_save.enabled
+                            return self.db.global.auto_save.enabled
                         end,
                     },
                     save_profile = {

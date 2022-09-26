@@ -1,16 +1,9 @@
 local addonName, addon = ...
 
 function addon:RestoreDbBindings()
-    local profile = self.db.profile.list
-    print("Profile name")
-    profileName = self.db:GetCurrentProfile()
-    self.db.profile.update_bindings_trigger = false
+    local profile = self.db.profile
 
-    if profileName == "Default" then
-        self:RestoreDefaultBindings()
-        self:SaveProfile()
-        return
-    end
+    update_bindings_trigger = false
 
     if LibStub("AceAddon-3.0"):GetAddon("Dominos", true) and profile.bindingsDominos then
         for index = 13, 60 do
@@ -50,11 +43,12 @@ function addon:RestoreDbBindings()
             end
         end
     end
-    self.db.profile.update_bindings_trigger = true
+    update_bindings_trigger = true
 end
 
 function addon:RestoreDefaultBindings()
-    self.db.profile.update_bindings_trigger = false
+    update_bindings_trigger = false
     LoadBindings(0)
-    self.db.profile.update_bindings_trigger = true
+    self:SaveBindings()
+    update_bindings_trigger = true
 end
