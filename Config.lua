@@ -1,22 +1,21 @@
 local addonName, addon = ...
 
-local L = LibStub("AceLocale-3.0"):GetLocale(addonName)
-
 function addon:GetOptions()
     self.options = self.options or {
         type = "group",
         args = {
-            general = {
-                name = L.cfg_settings,
+            general_settings = {
+                name = "General options",
                 type = "group",
                 args = {
                     minimap = {
                         order = 1,
-                        name = L.cfg_minimap_icon,
+                        name = "Minimap Icon",
+                        desc = "Show a button next to the minimap.",
                         type = "toggle",
                         width = "full",
                         set = function(info, value)
-                            self.db.profile.minimap.hide = not value
+                            self.db.global.minimap.hide = not value
                             if value then
                                 self.icon:Show(addonName)
                             else
@@ -24,19 +23,39 @@ function addon:GetOptions()
                             end
                         end,
                         get = function(info)
-                            return not self.db.profile.minimap.hide
+                            return not self.db.global.minimap.hide
                         end,
                     },
-                    replace_macros = {
+                    auto_save = {
                         order = 2,
-                        name = L.cfg_replace_macros,
+                        name = "Auto save keybinds on change",
+                        desc = "Automatically saves your keybinds to the active profile when you make changes. This option can accidentally overwrite existing profile if 'Character specific keybinds' are not enabled or if you play on another computer.",
                         type = "toggle",
                         width = "full",
+                        confirm = function(info, value)
+                            if value then
+                                self.db.global.auto_save.enabled = true
+                                return "This setting is applied only after reloading your UI. Do you want to reload UI now?"
+                            else
+                                self.db.global.auto_save.enabled = false
+                                return "This setting is applied only after reloading your UI. Do you want to reload UI now?"
+                            end
+                        end,
                         set = function(info, value)
-                            self.db.profile.replace_macros = value
+                            ReloadUI();
                         end,
                         get = function(info)
-                            return self.db.profile.replace_macros
+                            return self.db.global.auto_save.enabled
+                        end,
+                    },
+                    save_profile = {
+                        order = 3,
+                        name = "Save current profile",
+                        desc = "Save your keybinds to the currently active profile manually. Not required when 'Auto save keybinds on change' is enabled.",
+                        type = "execute",
+                        width = "normal",
+                        func = function()
+                            self:SaveProfile()
                         end,
                     },
                 },
