@@ -38,7 +38,6 @@ end
 function addon:InitializeProfile()
     local profile = self.db.profile
     if profile.bindings == nil then
-        print("Initialize profile")
         addon:SaveBindings()
     end
 end
