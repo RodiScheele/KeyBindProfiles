@@ -1,2 +1,5 @@
+1.0.1
+- Fixed bug where upon loading a different profile and logging out, the previous profile would overwrite the one logged out in.
+
 1.0.0
 - Initial creation
