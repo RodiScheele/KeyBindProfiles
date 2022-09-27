@@ -33,7 +33,7 @@ I haven't tried other action bar addons, it should work as long as an addon does
 Azaiko's links
 -----
 
-* Source code [https://github.com/rscheele/Key-bind-profiles-Azaiko-classic-wotlk](https://github.com/rscheele/Key-bind-profiles-Azaiko-classic-wotlk)
+* Source code [https://github.com/rscheele/Key-bind-profiles-Azaiko](https://github.com/rscheele/Key-bind-profiles-Azaiko)
 * CurseForge [https://www.curseforge.com/wow/addons/keybindprofiles](https://www.curseforge.com/wow/addons/keybindprofiles)
 * Wowinterface [https://www.wowinterface.com/downloads/info26417-KeyBindProfiles.html](https://www.wowinterface.com/downloads/info26417-KeyBindProfiles.html)
 * Wago [https://addons.wago.io/addons/key-bind-profiles-azaiko-classic-wotlk](https://addons.wago.io/addons/key-bind-profiles-azaiko-classic-wotlk)
