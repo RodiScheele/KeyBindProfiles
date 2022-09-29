@@ -36,7 +36,7 @@ Azaiko's links
 * Source code [https://github.com/rscheele/Key-bind-profiles-Azaiko](https://github.com/rscheele/Key-bind-profiles-Azaiko)
 * CurseForge [https://www.curseforge.com/wow/addons/keybindprofiles](https://www.curseforge.com/wow/addons/keybindprofiles)
 * Wowinterface [https://www.wowinterface.com/downloads/info26417-KeyBindProfiles.html](https://www.wowinterface.com/downloads/info26417-KeyBindProfiles.html)
-* Wago [https://addons.wago.io/addons/key-bind-profiles-azaiko-classic-wotlk](https://addons.wago.io/addons/key-bind-profiles-azaiko-classic-wotlk)
+* Wago [https://addons.wago.io/addons/key-bind-profiles-azaiko-classic-wotlk](https://addons.wago.io/addons/key-bind-profiles-azaiko)
 
 Original links to Silencer2K his addon
 -----
