@@ -11,7 +11,7 @@ function addon:OnInitialize()
         }
     })
 
-    update_bindings_trigger = true
+    self.db.global.update_bindings_trigger = true
 
     -- Minimap icon
     self.ldb = LibStub("LibDataBroker-1.1"):NewDataObject(addonName, {
@@ -40,6 +40,11 @@ function addon:OnInitialize()
     local LibDualSpec = LibStub('LibDualSpec-1.0')
     LibDualSpec:EnhanceDatabase(self.db, addonName)
     LibDualSpec:EnhanceOptions(self.options.args.profiles, self.db)
+end
+
+function addon:OnEnable()
+    self:InitializeProfile()
+    self:RestoreDbBindings()
 
     -- Register Callbacks on certain events
     self.db.RegisterCallback(self, "OnProfileChanged", "RestoreDbBindings")
@@ -49,10 +54,6 @@ function addon:OnInitialize()
     if self.db.global.auto_save.enabled then
         self:RegisterEvent("UPDATE_BINDINGS", "SaveProfile")
         self.db.RegisterCallback(self, "OnProfileShutdown", "SaveProfile")
+        self.db.RegisterCallback(self, "OnDatabaseShutdown", "SaveProfile")
     end
-end
-
-function addon:OnEnable()
-    self:InitializeProfile()
-    self:RestoreDbBindings()
 end

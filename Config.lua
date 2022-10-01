@@ -29,7 +29,7 @@ function addon:GetOptions()
                     auto_save = {
                         order = 2,
                         name = "Auto save keybinds on change",
-                        desc = "Automatically saves your keybinds to the active profile when you make changes. This option can accidentally overwrite existing profile if 'Character specific keybinds' are not enabled or if you play on another computer.",
+                        desc = "Automatically saves your keybinds to the active profile when you make changes, thus not requiring to press 'Save current profile anymore'.",
                         type = "toggle",
                         width = "full",
                         confirm = function(info, value)

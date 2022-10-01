@@ -1,7 +1,7 @@
 local addonName, addon = ...
 
 function addon:SaveProfile()
-    if update_bindings_trigger then
+    if self.db.global.update_bindings_trigger then
         self:SaveBindings()
     end
 end

@@ -1,0 +1,18 @@
+## Interface: 90207
+## Title: Key Bind Profiles
+## Notes: Simple keybind profile manager, allowing you to switch between different keybind sets and assign unique profiles to different specializations.
+## Author: Azaiko
+## SavedVariables: KeyBindProfilesDBv1
+## Version: 1.0.1
+## X-Category: Actionbars
+## X-Email: azaiko22@gmail.com
+## X-Website: https://www.curseforge.com/wow/addons/*
+## X-Feedback: https://www.curseforge.com/wow/addons/*
+
+KeyBindProfiles.xml
+
+KeyBindProfiles.lua
+Config.lua
+Save.lua
+Restore.lua
+
