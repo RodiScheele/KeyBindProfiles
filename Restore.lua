@@ -5,8 +5,29 @@ function addon:RestoreDbBindings()
 
     self.db.global.update_bindings_trigger = false
 
+    -- clear
+    local index
+    for index = 1, GetNumBindings() do
+        local bind = { GetBinding(index) }
+        if bind[3] then
+            local key
+            for key in table.s2k_values({ select(3, unpack(bind)) }) do
+                SetBinding(key)
+            end
+        end
+    end
+
+    -- restore
+    local cmd, keys
+    for cmd, keys in pairs(profile.bindings) do
+        local key
+        for key in table.s2k_values(keys) do
+            SetBinding(key, cmd)
+        end
+    end
+
     if LibStub("AceAddon-3.0"):GetAddon("Dominos", true) and profile.bindingsDominos then
-        for index = 13, 60 do
+        for index = 1, 60 do
             local key
 
             -- clear
@@ -21,33 +42,15 @@ function addon:RestoreDbBindings()
                 end
             end
         end
-    else
-        -- clear
-        local index
-        for index = 1, GetNumBindings() do
-            local bind = { GetBinding(index) }
-            if bind[3] then
-                local key
-                for key in table.s2k_values({ select(3, unpack(bind)) }) do
-                    SetBinding(key)
-                end
-            end
-        end
-
-        -- restore
-        local cmd, keys
-        for cmd, keys in pairs(profile.bindings) do
-            local key
-            for key in table.s2k_values(keys) do
-                SetBinding(key, cmd)
-            end
-        end
     end
+
     self.db.global.update_bindings_trigger = true
 end
 
 function addon:RestoreDefaultBindings()
     self.db.global.update_bindings_trigger = false
+    self.db.profile.bindings = {}
+    self.db.profile.bindingsDominos = {}
     LoadBindings(0)
     self:SaveBindings()
     self.db.global.update_bindings_trigger = true
