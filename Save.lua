@@ -24,7 +24,7 @@ function addon:SaveBindings()
     if LibStub("AceAddon-3.0"):GetAddon("Dominos", true) then
         bindingsDominos = {}
 
-        for index = 13, 60 do
+        for index = 1, 60 do
             local bind = { GetBindingKey(string.format("CLICK DominosActionButton%d:LeftButton", index)) }
             if #bind > 0 then
                 bindingsDominos[index] = bind
