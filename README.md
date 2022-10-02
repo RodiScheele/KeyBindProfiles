@@ -8,15 +8,17 @@ This addon allows you to save your keybind settings into different profiles, to 
 Originally I wanted to port Silencer2K his action-bar-profiles to wotlk for it's keybind profile functionality. However, a lot of API calls from that addon are not yet implemented in the wotlk API's. After stripping down the codebase to a working version I decided that rewriting and simplifying the keybind saving logic into a new addon was wiser. The only logic left from Silencer2K his original addon is the keybind saving and loading aspect, the rest of this addon is a complete rewrite.
 
 How to use
--------------
+-----
 
 Save and load profiles from the addon's interface menu.
 
 **Auto save keybinds on change is disabled by default**. This means that you have to manually save your profiles each time you make a change to your keybinds. Enabling this option allows any changes made to your keybinds to be automatically saved to the profile, thus not requiring the need to save the profile manually.
 
-Note that this addon is best used on one computer and one single wow installation, using multiple computers might result in unexpected behaviours. 
-
 Quitting the game will always keep the most recently loaded profile in the game's default setting.
+
+Storage and backup
+-----
+If you delete your WTF folder in your wow directory all saved keybind profiles will be wiped. The file storing and containing all keybind settings is located in this wow directory: ```/World of Warcraft/_classic_/WTF/Account/ACCOUNTNAME/SavedVariables/KeyBindProfiles.lua. Keep a backup of this file if you want to keep your keybinds safe, if you reinstall wow place this file back into this folder to restore your old keybind settings.
 
 It is wise to make backup profiles, in case you accidentally clear/overwrite an important profile or if the addon behaves in unexpected ways.
 
