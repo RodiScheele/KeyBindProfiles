@@ -18,7 +18,7 @@ Quitting the game will always keep the most recently loaded profile in the game'
 
 Storage and backup
 -----
-If you delete your WTF folder in your wow directory all saved keybind profiles will be wiped. The file storing and containing all keybind settings is located in this wow directory: ```/World of Warcraft/_classic_/WTF/Account/ACCOUNTNAME/SavedVariables/KeyBindProfiles.lua. Keep a backup of this file if you want to keep your keybinds safe, if you reinstall wow place this file back into this folder to restore your old keybind settings.
+If you delete your WTF folder in your wow directory all saved keybind profiles will be wiped. The file storing and containing all keybind settings is located in this wow directory: `/World of Warcraft/_classic_/WTF/Account/ACCOUNTNAME/SavedVariables/KeyBindProfiles.lua`. Keep a backup of this file if you want to keep your keybinds safe, if you reinstall wow place this file back into this folder to restore your old keybind settings.
 
 It is wise to make backup profiles, in case you accidentally clear/overwrite an important profile or if the addon behaves in unexpected ways.
 
