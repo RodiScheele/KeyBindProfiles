@@ -17,6 +17,8 @@ function addon:RestoreDbBindings()
         end
     end
 
+
+    -- This is a comment
     -- restore
     local cmd, keys
     for cmd, keys in pairs(profile.bindings) do
