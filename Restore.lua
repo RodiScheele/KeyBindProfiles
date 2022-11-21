@@ -54,4 +54,5 @@ function addon:RestoreDefaultBindings()
     LoadBindings(0)
     self:SaveBindings()
     self.db.global.update_bindings_trigger = true
+    self:Print("Succesfully reset '" .. self.db:GetCurrentProfile() .. "' to default keybinds")
 end

@@ -38,6 +38,7 @@ end
 function addon:InitializeProfile()
     local profile = self.db.profile
     if profile.bindings == nil then
+        self:Print("Created a new profile for '" .. self.db:GetCurrentProfile() .. "'")
         addon:SaveBindings()
     end
 end
