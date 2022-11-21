@@ -10,11 +10,20 @@ Originally I wanted to port Silencer2K his action-bar-profiles to wotlk for it's
 How to use
 -----
 
-Save and load profiles from the addon's interface menu.
+Save and load profiles from the addon's interface menu or use the chat commands from '/kbp'.
 
 **Auto save keybinds on change is disabled by default**. This means that you have to manually save your profiles each time you make a change to your keybinds. Enabling this option saves changes made to your keybinds automatically for the active profile, such that you don't have to manually save your keybinds with the 'Save keybinds' button.
 
 Quitting the game will always keep the most recently loaded profile in the game's default setting.
+
+Commands
+-----
+Currently the following commands are supported:
+* /kbp save -- Saves the current profile
+* /kbp save profilename  -- Save to the specified profile. Overwrites existing profiles or creates a new profile if specified profile doesn't exist
+* /kbp load profilename  -- Loads an existing profile
+* /kbp delete profilename  -- Deletes an existing profile
+* /kbp list -- Lists all existing profiles
 
 Storage and backup
 -----
@@ -33,7 +42,7 @@ I haven't tried other action bar addons, it should work as long as an addon does
 Azaiko's links
 -----
 
-* Source code [https://github.com/rscheele/Key-bind-profiles-Azaiko](https://github.com/rscheele/Key-bind-profiles-Azaiko)
+* Source code [https://github.com/rscheele/KeyBindProfiles](https://github.com/rscheele/KeyBindProfiles)
 * CurseForge [https://www.curseforge.com/wow/addons/keybindprofiles](https://www.curseforge.com/wow/addons/keybindprofiles)
 * Wowinterface [https://www.wowinterface.com/downloads/info26417-KeyBindProfiles.html](https://www.wowinterface.com/downloads/info26417-KeyBindProfiles.html)
 * Wago [https://addons.wago.io/addons/key-bind-profiles-azaiko-classic-wotlk](https://addons.wago.io/addons/key-bind-profiles-azaiko)
