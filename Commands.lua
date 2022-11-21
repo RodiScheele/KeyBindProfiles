@@ -31,20 +31,32 @@ function addon:OnChatCommand(message)
 
     elseif cmd == "delete" then
         if param then
-            
-            self.db:DeleteProfile(param)
-
+            local exists = self:ProfileExists(param)
+            if exists then
+                self.db:DeleteProfile(param)
+            end
         end
 
-    elseif cmd == "use" or cmd == "load" or cmd == "ld" then
-        --[[if param then
-            local profile = self:GetProfiles(param, true)
-
-            if profile then
-                self:UseProfile(profile)
-            else
-                self:Printf(L.msg_profile_not_exists, param)
+    elseif cmd == "load" then
+        if param then
+            local exists = self:ProfileExists(param)
+            if exists then
+                self.db:SetProfile(param)
+                self.db:SetDualSpecProfile(param)
+                self:Printf("Loaded " .. param)
             end
-        end]]
+        end
     end
+end
+
+function addon:ProfileExists(param)
+    local profiles, i = self.db:GetProfiles()
+
+    for i, v in pairs(profiles) do
+        if (param == v) then
+            return true
+        end
+    end
+
+    return false
 end
