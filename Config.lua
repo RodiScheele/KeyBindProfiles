@@ -11,7 +11,7 @@ function addon:GetOptions()
                     minimap = {
                         order = 1,
                         name = "Minimap Icon",
-                        desc = "Show a button next to the minimap.",
+                        desc = "Display a button next to the minimap.",
                         type = "toggle",
                         width = "full",
                         set = function(info, value)
@@ -29,7 +29,7 @@ function addon:GetOptions()
                     auto_save = {
                         order = 2,
                         name = "Auto save keybinds on change",
-                        desc = "Automatically saves your keybinds to the active profile when you make changes, thus not requiring to press 'Save current profile anymore'.",
+                        desc = "Automatically saves your keybinds to the active profile when you make changes. Manual saving is not required when this option is checked.",
                         type = "toggle",
                         width = "full",
                         confirm = function(info, value)
@@ -51,13 +51,28 @@ function addon:GetOptions()
                     save_profile = {
                         order = 3,
                         name = "Save current profile",
-                        desc = "Save your keybinds to the currently active profile manually. Not required when 'Auto save keybinds on change' is enabled.",
+                        desc = "Saves your keybinds to the active profile. Not required when 'Auto save keybinds on change' is enabled.",
                         type = "execute",
                         width = "normal",
                         func = function()
+                            self:Print("Profile saved")
                             self:SaveProfile()
                         end,
                     },
+                    whitespace = {
+                        order = 4,
+                        name = " ",
+                        type = "description",
+                        width = "full",
+                        fontSize = "large"
+                    },
+                    help_commands = {
+                        order = 5,
+                        name = "Type '/kbp help' for a list of commands",
+                        type = "description",
+                        width = "full",
+                        fontSize = "large"
+                    }
                 },
             },
             profiles = LibStub("AceDBOptions-3.0"):GetOptionsTable(self.db),
