@@ -24,7 +24,7 @@ function addon:OnInitialize()
         OnTooltipShow = function(tooltip)
 			if not tooltip or not tooltip.AddLine then return end
 			tooltip:AddLine("KeyBindProfiles")
-			tooltip:AddLine("Current profile: "..self.db:GetCurrentProfile())
+			tooltip:AddLine("Current profile: ".. self.db:GetCurrentProfile())
 		end
     })
     
@@ -40,6 +40,9 @@ function addon:OnInitialize()
     local LibDualSpec = LibStub('LibDualSpec-1.0')
     LibDualSpec:EnhanceDatabase(self.db, addonName)
     LibDualSpec:EnhanceOptions(self.options.args.profiles, self.db)
+
+    -- Chat commands
+    self:RegisterChatCommand("kbp", "OnChatCommand")
 end
 
 function addon:OnEnable()
