@@ -1,4 +1,4 @@
-## Interface: 30400
+## Interface: 30401
 ## Title: Key Bind Profiles
 ## Notes: Simple keybind profile manager, allowing you to switch between different keybind sets and assign unique profiles to different specializations.
 ## Author: Azaiko
