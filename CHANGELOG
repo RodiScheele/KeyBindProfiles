@@ -1,5 +1,8 @@
+1.1.4
+- Add project ID's to toc
+
 1.1.3
-- Use Github actions to build and release the addon automatically (Big thanks to the BigWigs team for their packager Action!)
+- Use Github actions to build and release the addon automatically (Big thanks to the BigWigs team for their packager Action)
 
 1.1.2
 - ToC updated for Retail, Wrath. Added Classic
