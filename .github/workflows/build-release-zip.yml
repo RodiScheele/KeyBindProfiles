@@ -25,7 +25,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: "KeyBindProfiles-$version-release.zip"
-          tag_name: 1.1.2-release
+          tag_name: KeyBindProfiles-1.1.2
           draft: false
           prerelease: false
         env:
