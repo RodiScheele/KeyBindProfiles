@@ -12,7 +12,7 @@ How to use
 
 Save and load profiles from the addon's interface menu or use the chat commands from '/kbp'.
 
-**Auto save keybinds on change is disabled by default**. This means that you have to manually save your profiles each time you make a change to your keybinds. Enabling this option saves changes made to your keybinds automatically for the active profile, such that you don't have to manually save your keybinds with the 'Save keybinds' button.
+**Auto save keybinds on change is enabled by default**. This means that all changes made to keybinds are saved automatically. Disable this option if you want manual control over this, manually saving keybinds can be done by pressing the 'Save Keybinds' button or using the /kbp command.
 
 Quitting the game will always keep the most recently loaded profile in the game's default setting.
 

@@ -7,7 +7,7 @@ function addon:OnInitialize()
     self.db = LibStub("AceDB-3.0"):New(addonName .. "DBv1", {
         global = {
             minimap = { hide = false, },
-            auto_save = { enabled = false, },
+            auto_save = { enabled = true, },
         }
     })
 
