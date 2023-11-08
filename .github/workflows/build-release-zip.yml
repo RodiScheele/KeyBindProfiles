@@ -17,8 +17,7 @@ jobs:
         run: |
           version="1.1.2"
           addon_dir="KeyBindProfiles"
-          # Use find to exclude .git directories and build-release-zip.yml file
-          find "$addon_dir" -type f -not -name '.gitignore' -not -name 'build-release-zip.yml' | xargs zip -r "KeyBindProfiles-$version-release.zip" $addon_dir
+          find "$addon_dir" -type f -not -name '.gitignore' -not -name 'build-release-zip.yml' | xargs zip -r "KeyBindProfiles-$version-release.zip" $addon_dir --exclude "$addon_dir/.github/workflows/*"
         working-directory: ${{ github.workspace }}
 
       - name: Upload Release ZIP
