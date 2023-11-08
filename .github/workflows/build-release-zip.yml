@@ -1,4 +1,4 @@
-name: Create Release ZIP
+name: Create Release and Upload ZIP
 
 on:
   push:
@@ -19,6 +19,17 @@ jobs:
           addon_dir="KeyBindProfiles"
           zip -r "KeyBindProfiles-$version-release.zip" $addon_dir
         working-directory: ${{ github.workspace }}
+
+      - name: Create GitHub Release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.ref }}
+          files: "KeyBindProfiles-$version-release.zip"
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload Release ZIP
         uses: actions/upload-artifact@v2
