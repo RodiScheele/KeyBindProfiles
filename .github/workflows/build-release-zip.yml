@@ -17,7 +17,7 @@ jobs:
         run: |
           version="1.1.2"
           addon_dir="KeyBindProfiles"
-          find "$addon_dir" -type f -not -name '.gitignore' -not -name 'build-release-zip.yml' | xargs zip -r "KeyBindProfiles-$version-release.zip" $addon_dir --exclude "$addon_dir/.github/workflows/*"
+          zip -r "KeyBindProfiles-$version-release.zip" $addon_dir
         working-directory: ${{ github.workspace }}
 
       - name: Upload Release ZIP
