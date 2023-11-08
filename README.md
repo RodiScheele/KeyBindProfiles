@@ -16,7 +16,7 @@ Save and load profiles from the addon's interface menu or use the chat commands 
 
 Quitting the game will always keep the most recently loaded profile in the game's default setting.
 
-Commands
+Commands 
 -----
 Currently the following commands are supported:
 * /kbp save -- Saves the current profile
