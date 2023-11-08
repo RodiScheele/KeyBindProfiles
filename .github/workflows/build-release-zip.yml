@@ -31,8 +31,14 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Upload Release ZIP
-        uses: actions/upload-artifact@v2
+      - name: Get Release ID
+        id: get_release
+        run: echo "::set-output name=release_id::${{ steps.create_release.outputs.release_id }}"
+
+      - name: Upload Release Asset
+        uses: softprops/action-gh-release@v1
         with:
-          name: release-zip
-          path: "KeyBindProfiles-$version-release.zip"
+          files: "KeyBindProfiles-$version-release.zip"
+          release_id: ${{ steps.get_release.outputs.release_id }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
