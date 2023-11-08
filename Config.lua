@@ -51,7 +51,7 @@ function addon:GetOptions()
                     save_profile = {
                         order = 3,
                         name = "Save current profile",
-                        desc = "Saves your keybinds to the active profile. Not required when 'Auto save keybinds on change' is enabled.",
+                        desc = "Manually saves your keybinds to the active profile. Not required when 'Auto save keybinds on change' is enabled.",
                         type = "execute",
                         width = "normal",
                         func = function()
