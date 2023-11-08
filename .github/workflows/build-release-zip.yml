@@ -9,24 +9,26 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      VERSION: 1.1.2  # Define the version as an environment variable
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
       - name: Create Release ZIP
         run: |
-          version="1.1.2"
           addon_dir="KeyBindProfiles"
-          zip -r "KeyBindProfiles-$version-release.zip" $addon_dir
+          zip -r "KeyBindProfiles-$VERSION-release.zip" $addon_dir
         working-directory: ${{ github.workspace }}
 
       - name: Create GitHub Release
         id: create_release
         uses: softprops/action-gh-release@v1
         with:
-          files: "KeyBindProfiles-$version-release.zip"
-          tag_name: ${{ format('v{0}-release', version) }}
-          release_name: KeyBindProfiles-$version
+          files: "KeyBindProfiles-$VERSION-release.zip"
+          tag_name: ${{ format('v{0}-release', env.VERSION) }}
+          release_name: KeyBindProfiles-$VERSION
           draft: false
           prerelease: false
         env:
@@ -39,7 +41,7 @@ jobs:
       - name: Upload Release Asset
         uses: softprops/action-gh-release@v1
         with:
-          files: "KeyBindProfiles-$version-release.zip"
+          files: "KeyBindProfiles-$VERSION-release.zip"
           release_id: ${{ steps.get_release.outputs.release_id }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
