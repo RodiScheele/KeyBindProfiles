@@ -29,7 +29,7 @@ function addon:GetOptions()
                     auto_save = {
                         order = 2,
                         name = "Auto save keybinds on change",
-                        desc = "If toggled, automatically saves your keybinds to the active profile when you make changes, manual saving is not required. If disabled, no keybind changes will be saved until you manually save your keybinds (either with the /kbp command or the 'save keybinds' button.).",
+                        desc = "If enabled (default), automatically saves your keybinds to the active profile when you make changes, manual saving is not required. If disabled, no keybind changes will be saved until you manually save your keybinds (either with the /kbp command or the 'save keybinds' button)",
                         type = "toggle",
                         width = "full",
                         confirm = function(info, value)
