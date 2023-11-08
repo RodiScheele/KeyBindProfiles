@@ -28,16 +28,16 @@ function addon:GetOptions()
                     },
                     auto_save = {
                         order = 2,
-                        name = "Auto save keybinds on change",
-                        desc = "Automatically saves your keybinds to the active profile when you make changes. Manual saving is not required when this option is checked.",
+                        name = "Manually save keybinds on change",
+                        desc = "If toggled off, keybinds are saved automatically. If togged on, keybinds have to be saved manually by typing '/kbp save' or clicking the 'Save current profile' button.",
                         type = "toggle",
                         width = "full",
                         confirm = function(info, value)
                             if value then
-                                self.db.global.auto_save.enabled = true
+                                self.db.global.auto_save.enabled = false
                                 return "This setting is applied only after reloading your UI. Do you want to reload UI now?"
                             else
-                                self.db.global.auto_save.enabled = false
+                                self.db.global.auto_save.enabled = true
                                 return "This setting is applied only after reloading your UI. Do you want to reload UI now?"
                             end
                         end,
