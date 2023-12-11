@@ -35,14 +35,18 @@ function addon:OnInitialize()
     LibStub("AceConfig-3.0"):RegisterOptionsTable(addonName, self:GetOptions())
     LibStub("AceConfigDialog-3.0"):AddToBlizOptions(addonName, "KeyBindProfiles", nil, "general_settings")
     LibStub("AceConfigDialog-3.0"):AddToBlizOptions(addonName, "Profiles", "KeyBindProfiles", "profiles")
-
+	
     -- Dual-spec support
+    pcall(function() self:LoadLibDualSpec() end)
+
+	-- Chat commands
+    self:RegisterChatCommand("kbp", "OnChatCommand")
+end
+
+function addon:LoadLibDualSpec()
     local LibDualSpec = LibStub('LibDualSpec-1.0')
     LibDualSpec:EnhanceDatabase(self.db, addonName)
     LibDualSpec:EnhanceOptions(self.options.args.profiles, self.db)
-
-    -- Chat commands
-    self:RegisterChatCommand("kbp", "OnChatCommand")
 end
 
 function addon:OnEnable()
