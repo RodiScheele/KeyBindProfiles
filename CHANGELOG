@@ -1,5 +1,8 @@
-1.1.6
+1.1.7
 - Cataclysm release
+
+1.1.6
+- Single toc file for all versions
 
 1.1.5
 - Suppress error loading libDualSpec-1.0 in classic

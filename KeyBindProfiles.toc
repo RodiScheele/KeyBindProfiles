@@ -2,18 +2,23 @@
 ## Interface-Classic: 11502
 ## Interface-Wrath: 30403
 ## Interface-Cata: 40400
+
 ## Title: Key Bind Profiles
 ## Notes: Lightweight keybind profile manager, allowing you to switch between different keybind sets and assign unique keybind profiles to different specializations.
+
+## Version: 1.1.7
+
 ## Author: Azaiko
-## SavedVariables: KeyBindProfilesDBv1
-## Version: 1.1.6
-## X-Category: Actionbars
 ## X-Email: azaiko22@gmail.com
+
+## X-Category: Actionbars
 ## X-Website: https://www.curseforge.com/wow/addons/keybindprofiles
 ## X-Feedback: https://www.curseforge.com/wow/addons/keybindprofiles
 ## X-Curse-Project-ID: 681984
 ## X-Wago-ID: 9rN4RjKD
 ## X-WoWI-ID: 26417
+
+## SavedVariables: KeyBindProfilesDBv1
 
 KeyBindProfiles.xml
 
