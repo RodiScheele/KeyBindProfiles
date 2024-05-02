@@ -1,7 +1,7 @@
 
 # Key Bind Profiles Addon
 
-**Key Bind Profiles** is an addon designed to improve the management of keybinds in World of Warcraft. Blizzard’s default system only allows for character-specific keybind settings. This addon extends functionality by allowing specialization-specific profiles that automatically load when you switch specializations.
+**Key Bind Profiles** is a lightweight addon designed to improve the management of keybinds in World of Warcraft. Blizzard’s default system only allows for character-specific keybind settings. This addon extends functionality by allowing specialization-specific profiles that automatically load when you switch specializations.
 
 ## Features
 
