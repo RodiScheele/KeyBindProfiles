@@ -19,7 +19,7 @@ function addon:OnInitialize()
         icon = "Interface\\ICONS\\INV_Misc_Punchcards_White",
         label = addonName,
         OnClick = function(obj, button)
-            InterfaceOptionsFrame_OpenToCategory(addonName)
+            Settings.OpenToCategory(addonName)
         end,
         OnTooltipShow = function(tooltip)
 			if not tooltip or not tooltip.AddLine then return end
@@ -41,6 +41,7 @@ function addon:OnInitialize()
 
 	-- Chat commands
     self:RegisterChatCommand("kbp", "OnChatCommand")
+
 end
 
 function addon:LoadLibDualSpec()

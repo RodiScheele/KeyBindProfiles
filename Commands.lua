@@ -18,7 +18,7 @@ function addon:OnChatCommand(message)
     local cmd, param = self:ParseArgs(message)
 
     if not cmd then
-        InterfaceOptionsFrame_OpenToCategory(addonName)
+        Settings.OpenToCategory(addonName)
         return
     end
 
