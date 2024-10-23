@@ -1,4 +1,4 @@
-## Interface: 100207,110000,110002
+## Interface: 100207,110000,110002, 110005
 ## Interface-Classic: 11503
 ## Interface-Wrath: 30403
 ## Interface-Cata: 40400
@@ -6,7 +6,7 @@
 ## Title: Key Bind Profiles
 ## Notes: Lightweight keybind profile manager, allowing you to switch between different keybind sets and assign unique keybind profiles to different specializations.
 
-## Version: 1.1.11
+## Version: 1.1.12
 
 ## IconTexture: Interface\ICONS\INV_Misc_Punchcards_White
 
