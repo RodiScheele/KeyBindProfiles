@@ -1,11 +1,22 @@
-## Interface: 110007, 110100
+## Interface: 110105, 110107, 110100
 ## Interface-Classic: 11505, 11506
 ## Interface-Cata: 40401, 40402
 
 ## Title: Key Bind Profiles
 ## Notes: Lightweight keybind profile manager, allowing you to switch between different keybind sets and assign unique keybind profiles to different specializations.
+## Category-enUS: Action Bars
+## Category-deDE: Aktionsleisten
+## Category-esES: Barras de acción
+## Category-esMX: Barras de acción
+## Category-frFR: Barres d’action
+## Category-itIT: Barre delle azioni
+## Category-koKR: 행동 단축바
+## Category-ptBR: Barras de ação
+## Category-ruRU: Панели команд
+## Category-zhCN: 动作条
+## Category-zhTW: 快捷列
 
-## Version: 1.1.13
+## Version: 1.1.14
 
 ## IconTexture: Interface\ICONS\INV_Misc_Punchcards_White
 
