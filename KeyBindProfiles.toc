@@ -16,7 +16,7 @@
 ## Category-zhCN: 动作条
 ## Category-zhTW: 快捷列
 
-## Version: 1.1.14
+## Version: 1.1.15
 
 ## IconTexture: Interface\ICONS\INV_Misc_Punchcards_White
 
