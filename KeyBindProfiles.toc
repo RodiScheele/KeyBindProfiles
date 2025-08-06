@@ -1,4 +1,4 @@
-## Interface: 110105, 110107, 110100
+## Interface: 110200
 ## Interface-Classic: 11505, 11506
 ## Interface-Mists: 50500
 
@@ -16,7 +16,7 @@
 ## Category-zhCN: 动作条
 ## Category-zhTW: 快捷列
 
-## Version: 1.1.15
+## Version: 1.1.16
 
 ## IconTexture: Interface\ICONS\INV_Misc_Punchcards_White
 
