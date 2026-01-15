@@ -1,6 +1,6 @@
 --[[
 LibDualSpec-1.0 - Adds dual spec support to individual AceDB-3.0 databases
-Copyright (C) 2009-2022 Adirelle
+Copyright (C) 2009-2024 Adirelle
 
 All rights reserved.
 
@@ -31,10 +31,10 @@ NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 --]]
 
--- Don't load unless we are Retail or Wrath Classic
-if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE and WOW_PROJECT_ID ~= WOW_PROJECT_WRATH_CLASSIC then return end
+-- Only load in Classic Era on Season of Discovery and Anniversary realms
+if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC and C_Seasons.GetActiveSeason() ~= 2 and C_Seasons.GetActiveSeason() ~= 11 and C_Seasons.GetActiveSeason() ~= 12 then return end
 
-local MAJOR, MINOR = "LibDualSpec-1.0", 22
+local MAJOR, MINOR = "LibDualSpec-1.0", 27
 assert(LibStub, MAJOR.." requires LibStub")
 local lib, minor = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
@@ -78,15 +78,15 @@ local specNames = {TALENT_SPEC_PRIMARY, TALENT_SPEC_SECONDARY}
 if isRetail then
 	-- class id specialization functions don't require player data to be loaded
 	local _, classId = UnitClassBase("player")
-	numSpecs = GetNumSpecializationsForClassID(classId)
+	numSpecs = C_SpecializationInfo.GetNumSpecializationsForClassID(classId)
 	for i = 1, numSpecs do
 		local _, name = GetSpecializationInfoForClassID(classId, i)
 		specNames[i] = name
 	end
 end
 
-local GetSpecialization = isRetail and GetSpecialization or GetActiveTalentGroup
-local CanPlayerUseTalentSpecUI = isRetail and C_SpecializationInfo.CanPlayerUseTalentSpecUI or function()
+local GetSpecialization = isRetail and GetSpecialization or GetActiveTalentGroup or C_SpecializationInfo.GetActiveSpecGroup
+local CanPlayerUseTalentSpecUI = C_SpecializationInfo.CanPlayerUseTalentSpecUI or function()
 	return true, HELPFRAME_CHARACTER_BULLET5
 end
 
@@ -343,24 +343,34 @@ for i = 1, numSpecs do
 			return lib.currentSpec == specIndex and L_CURRENT:format(specNames[specIndex]) or specNames[specIndex]
 		end,
 		desc = not isRetail and function(info)
-			local specIndex = tonumber(info[#info]:sub(-1))
-			local highPointsSpentIndex = nil
-			for treeIndex = 1, 3 do
-				local name, _, pointsSpent, _, previewPointsSpent = GetTalentTabInfo(treeIndex, false, false, specIndex)
-				if name then
-					local displayPointsSpent = pointsSpent + previewPointsSpent
-					points[treeIndex] = displayPointsSpent
-					if displayPointsSpent > 0 and (not highPointsSpentIndex or displayPointsSpent > points[highPointsSpentIndex]) then
-						highPointsSpentIndex = treeIndex
+			if ClassicExpansionAtMost(LE_EXPANSION_CATACLYSM) then -- Pre-5.0
+				local specIndex = tonumber(info[#info]:sub(-1))
+				local highPointsSpentIndex = nil
+				for treeIndex = 1, 3 do
+					local _, name, _, _, pointsSpent, _, previewPointsSpent = GetTalentTabInfo(treeIndex, nil, nil, specIndex)
+					if name then
+						local displayPointsSpent = pointsSpent + previewPointsSpent
+						points[treeIndex] = displayPointsSpent
+						if displayPointsSpent > 0 and (not highPointsSpentIndex or displayPointsSpent > points[highPointsSpentIndex]) then
+							highPointsSpentIndex = treeIndex
+						end
+					else
+						points[treeIndex] = 0
 					end
-				else
-					points[treeIndex] = 0
+				end
+				if highPointsSpentIndex then
+					points[highPointsSpentIndex] = GREEN_FONT_COLOR:WrapTextInColorCode(points[highPointsSpentIndex])
+				end
+				return ("|cffffffff%s / %s / %s|r"):format(unpack(points))
+			elseif C_SpecializationInfo.GetSpecialization then -- 5.0 - 9.x
+				local specGroup = tonumber(info[#info]:sub(-1))
+				local specIndex = C_SpecializationInfo.GetSpecialization(nil, nil, specGroup)
+				if specIndex then
+					local sex = UnitSex("player")
+					local _, specName = C_SpecializationInfo.GetSpecializationInfo(specIndex, nil, nil, sex)
+					return ("|cffffffff%s|r"):format(specName)
 				end
 			end
-			if highPointsSpentIndex then
-				points[highPointsSpentIndex] = GREEN_FONT_COLOR:WrapTextInColorCode(points[highPointsSpentIndex])
-			end
-			return ("|cffffffff%s / %s / %s|r"):format(unpack(points))
 		end or nil,
 		order = 42 + i,
 		get = function(info)
@@ -427,21 +437,23 @@ end
 -- Inspection
 -- ----------------------------------------------------------------------------
 
-local function iterator(registry, key)
-	local data
-	key, data = next(registry, key)
-	if key then
-		return key, data.name
+do
+	local function iterator(t, key)
+		local data
+		key, data = next(t, key)
+		if key then
+			return key, data.name
+		end
 	end
-end
 
---- Iterate through enhanced AceDB3.0 instances.
--- The iterator returns (instance, name) pairs where instance and name are the
--- arguments that were provided to lib:EnhanceDatabase.
--- @name LibDualSpec:IterateDatabases
--- @return Values to be used in a for .. in .. do statement.
-function lib:IterateDatabases()
-	return iterator, lib.registry
+	--- Iterate through enhanced AceDB3.0 instances.
+	-- The iterator returns (instance, name) pairs where instance and name are the
+	-- arguments that were provided to lib:EnhanceDatabase.
+	-- @name LibDualSpec:IterateDatabases
+	-- @return Values to be used in a for .. in .. do statement.
+	function lib:IterateDatabases()
+		return iterator, lib.registry
+	end
 end
 
 -- ----------------------------------------------------------------------------
