@@ -19,7 +19,7 @@ function addon:OnInitialize()
         icon = "Interface\\ICONS\\INV_Misc_Punchcards_White",
         label = addonName,
         OnClick = function(obj, button)
-            Settings.OpenToCategory(addonName)
+            Settings.OpenToCategory(optionsId)
         end,
         OnTooltipShow = function(tooltip)
 			if not tooltip or not tooltip.AddLine then return end
@@ -33,7 +33,7 @@ function addon:OnInitialize()
 
     -- Options tables
     LibStub("AceConfig-3.0"):RegisterOptionsTable(addonName, self:GetOptions())
-    LibStub("AceConfigDialog-3.0"):AddToBlizOptions(addonName, "KeyBindProfiles", nil, "general_settings")
+    frame, optionsId = LibStub("AceConfigDialog-3.0"):AddToBlizOptions(addonName, "KeyBindProfiles", nil, "general_settings")
     LibStub("AceConfigDialog-3.0"):AddToBlizOptions(addonName, "Profiles", "KeyBindProfiles", "profiles")
 	
     -- Dual-spec support
