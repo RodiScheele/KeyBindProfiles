@@ -1,10 +1,4 @@
-## Interface: 110207, 120000, 120001
-## Interface-Classic: 11508
-## Interface-TBC: 20505
-## Interface-Wrath: 30405, 38000
-## Interface-Cata: 40402
-## Interface-Mists: 50503
-
+## Interface: 110207, 120000, 120001, 50503, 38000, 20505, 11508
 
 ## Title: Key Bind Profiles
 ## Notes: Lightweight keybind profile manager, allowing you to switch between different keybind sets and assign unique keybind profiles to different specializations.
