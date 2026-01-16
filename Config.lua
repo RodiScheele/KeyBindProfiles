@@ -75,7 +75,7 @@ function addon:GetOptions()
                     }
                 },
             },
-            profiles = LibStub("AceDBOptions-3.0"):GetOptionsTable(self.db),
+            profiles = LibStub("AceDBOptions-3.0"):GetOptionsTable(self.db, true),
         },
     }
     return self.options

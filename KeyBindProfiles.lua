@@ -4,12 +4,14 @@ LibStub("AceAddon-3.0"):NewAddon(addon, addonName, "AceEvent-3.0", "AceConsole-3
 
 function addon:OnInitialize()
     -- Register DB
-    self.db = LibStub("AceDB-3.0"):New(addonName .. "DBv1", {
-        global = {
-            minimap = { hide = false, },
-            auto_save = { enabled = true, },
+    self.db = LibStub("AceDB-3.0"):New(
+        addonName .. "DBv1", {
+            global = {
+                minimap = { hide = false, },
+                auto_save = { enabled = true, },
+            }
         }
-    })
+    )
 
     self.db.global.update_bindings_trigger = true
 

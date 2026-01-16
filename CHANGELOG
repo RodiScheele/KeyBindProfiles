@@ -1,3 +1,7 @@
+1.2.1
+- Removed default profile creation for class and realm. Only character specific profiles will be created.
+- Add TBC & Titan reforged release.
+
 1.2.0
 - Midnight release 12.0
 - Updated most of the libraries for midnight
