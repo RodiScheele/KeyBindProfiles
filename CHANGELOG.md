@@ -1,3 +1,6 @@
+1.2.3
+- Add manual changelog
+
 1.2.2
 - Midnight 12.0.5 release
 

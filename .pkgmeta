@@ -16,3 +16,7 @@ externals:
 ignore:
   - .gitignore
   - .vscode
+
+manual-changelog:
+  filename: CHANGELOG.md
+  markup-type: markdown
