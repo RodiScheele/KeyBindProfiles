@@ -1,3 +1,6 @@
+1.2.4
+- Add support for patch 12.1
+
 1.2.3
 - Add manual changelog
 
