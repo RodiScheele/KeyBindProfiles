@@ -1,5 +1,6 @@
 1.3.0
 - Updated libdualspec to allow for the addon to work with dual spec for classic
+- Libraries are now packed with the BigWigs packager action, not maintained manually anymore with the exception of libdualspec which is maintained manually (for the time being)
 
 1.2.4
 - Add support for patch 12.1
