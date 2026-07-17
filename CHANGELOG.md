@@ -1,3 +1,6 @@
+1.3.0
+- Updated libdualspec to allow for the addon to work with dual spec for classic
+
 1.2.4
 - Add support for patch 12.1
 
