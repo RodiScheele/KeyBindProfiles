@@ -1,14 +1,12 @@
-tag 4e7ef4037538ba67c119d1fb5b49aed52b4d806e v1.27.0
+tag 7d9c23606c41a6cf006417979788fcc4c3297a95 v1.29.1
 Author:	Kyle Buller <bullerk@gmail.com>
-Date:	Thu Jul 3 06:45:41 2025 -0500
+Date:	Sun Jun 14 00:37:42 2026 -0500
 
-Tagging as v1.27.0
+Tagging as v1.29.1
 
-commit 70bd5fb2d2935280111630ffe47aa799aee7b420
+commit e5694f88e08bae1bb324dedbacad2e7117a510d8
 Author: Kyle Buller <bullerk@gmail.com>
-Date:   Thu Jul 3 06:42:44 2025 -0500
+Date:   Sun Jun 14 00:35:38 2026 -0500
 
-    Fix support for Mists of Pandaria Classic
-    
-    Fixes #6
+    Bump TOCs
 
