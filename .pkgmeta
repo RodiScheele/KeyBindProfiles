@@ -11,6 +11,7 @@ externals:
   libs/CallbackHandler-1.0: https://repos.wowace.com/wow/callbackhandler/trunk/CallbackHandler-1.0
   libs/LibDataBroker-1.1: https://repos.wowace.com/wow/libdatabroker-1-1
   libs/LibDBIcon-1.0: https://repos.wowace.com/wow/libdbicon-1-0/trunk/LibDBIcon-1.0
+  libs/LibDualSpec-1.0: https://repos.wowace.com/wow/libdualspec-1-0
   libs/LibStub: https://repos.wowace.com/wow/libstub/tags/1.0
 
 ignore:
