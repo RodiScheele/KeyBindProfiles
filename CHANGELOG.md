@@ -1,3 +1,6 @@
+1.4.1
+- Update libdualspec
+
 1.4.0
 - Restore libDualSpec-1.0 to the addon package
 
