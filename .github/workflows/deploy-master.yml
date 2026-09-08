@@ -1,0 +1,90 @@
+name: Deploy on master
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: Build without tagging or uploading
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: deploy-master
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      CF_API_KEY: ${{ secrets.CF_API_KEY }}
+      WOWI_API_TOKEN: ${{ secrets.WOWI_API_TOKEN }}
+      WAGO_API_TOKEN: ${{ secrets.WAGO_API_TOKEN }}
+      GITHUB_OAUTH: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - name: Clone project
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Resolve version
+        id: version
+        run: |
+          version=$(sed -n 's/^## Version:[[:space:]]*//p' KeyBindProfiles.toc | head -1 | tr -d '\r')
+          if [ -z "$version" ]; then
+            echo "::error file=KeyBindProfiles.toc::No '## Version:' line found"
+            exit 1
+          fi
+          tag="${version}-release"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
+          if git rev-parse -q --verify "refs/tags/$tag" >/dev/null; then
+            echo "released=true" >> "$GITHUB_OUTPUT"
+            echo "$tag already exists, nothing to deploy."
+          else
+            echo "released=false" >> "$GITHUB_OUTPUT"
+            echo "Deploying $tag."
+          fi
+
+      - name: Check changelog
+        if: steps.version.outputs.released == 'false'
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          if ! grep -qxE "#*[[:space:]]*${VERSION//./[.]}[[:space:]]*" CHANGELOG.md; then
+            echo "::error file=CHANGELOG.md::No entry for $VERSION"
+            exit 1
+          fi
+
+      # The packager refuses to build on a branch push when a tag points at HEAD, so the
+      # release cannot run inline here - it has to be dispatched against the tag ref.
+      - name: Create tag
+        if: steps.version.outputs.released == 'false' && inputs.dry_run != true
+        env:
+          TAG: ${{ steps.version.outputs.tag }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git tag -a "$TAG" -m "$TAG"
+          git push origin "refs/tags/$TAG"
+
+      - name: Trigger release
+        if: steps.version.outputs.released == 'false' && inputs.dry_run != true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ steps.version.outputs.tag }}
+        run: gh workflow run release.yml --ref "$TAG"
+
+      - name: Package without uploading
+        if: steps.version.outputs.released == 'false' && inputs.dry_run == true
+        uses: BigWigsMods/packager@v2
+        with:
+          args: -S -d
