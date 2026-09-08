@@ -1,3 +1,6 @@
+1.4.2
+- Bump toc for classic
+
 1.4.1
 - Update libdualspec
 
