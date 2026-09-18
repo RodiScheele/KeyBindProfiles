@@ -1,4 +1,4 @@
-1.4.3
+1.4.4
 - Release for wow forever beta
 
 1.4.2
