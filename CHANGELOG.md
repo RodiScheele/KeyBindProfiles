@@ -1,3 +1,6 @@
+1.4.3
+- Release for wow forever beta
+
 1.4.2
 - Bump toc for classic
 
