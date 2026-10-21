@@ -1,3 +1,6 @@
+1.4.5
+- Midnight update 
+
 1.4.4
 - Release for wow forever beta
 
